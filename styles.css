@@ -1,0 +1,106 @@
+
+canvas {
+    border: 2px solid yellowgreen;
+    z-index: 1;
+    background-color: white;
+    opacity: 0
+
+}
+
+#gameOver {
+    position: absolute;
+    display: inline-block;
+    justify-content: center;
+    margin: auto;
+    top: 12vh;
+    color: black;
+    font-weight: 900;
+    font-size: 3em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    background-image: url('./Assets/snake.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: yellowgreen;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+@media screen and (min-width: 1450px) {
+    body {
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: center;
+    /* Stretch the background image */
+    object-fit: cover;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    }
+    #gameCanvas {
+        width: 500px;
+        height: 500px;
+        margin-top: 13vh;
+    }
+
+    #gameOver {
+        top: 8vh;
+    }
+}
+
+@media screen and (max-width: 440px) {
+
+    #gameCanvas {
+       scale: 0.85;
+    }
+
+    body {
+        width: 100vw;
+        height: 100vh;
+        background-size: cover;
+    }
+
+    button {
+        padding: 40px;
+        font-size: 15px;
+    }
+}
+
+button {
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 5%;
+}
+
+button:hover {
+    background-color: yellowgreen;
+    cursor: pointer;
+}
+
+p {
+    color: white;
+    padding: 20px;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+    font-size: 30px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 50px;
+    display: flex;
+    color: white;
+    padding: 20px;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+}
