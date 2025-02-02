@@ -1,3 +1,16 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('./Assets/snake.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: yellowgreen;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+}
 
 canvas {
     border: 2px solid yellowgreen;
@@ -12,26 +25,12 @@ canvas {
     display: inline-block;
     justify-content: center;
     margin: auto;
-    top: 12vh;
+    top: 9vh;
     color: black;
     font-weight: 900;
     font-size: 3em;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    background-image: url('./Assets/snake.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: yellowgreen;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Courier New', Courier, monospace;
 }
 
 div {
@@ -56,10 +55,6 @@ div {
         width: 470px;
         height: 470px;
         margin-top: 13vh;
-    }
-
-    #gameOver {
-        top: 8vh;
     }
 }
 
@@ -87,7 +82,77 @@ div {
     #gameCanvas {
         margin-top: 7vh;
     }
+
+    #gameOver {
+        padding-bottom: 20px;
+    }
 }
+
+@media screen and (min-width: 1108px) {
+    .left, .right {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1108px) {
+    .controls {
+        display: block;
+    }
+
+    .controlcontainer {
+        position: absolute;
+        bottom: 9vh;
+        display: none;
+        flex-direction: column;
+        width: 200px;
+        height: 380px !important;
+        transform: rotate(90deg);
+        gap: 100px;
+    }
+
+    #startBtn {
+        z-index: 2;
+    }
+
+    .left, .right {
+        display: flex;
+        height: 200px;
+    }
+
+    .left button, .right button {
+        opacity: 0.6;
+    }
+
+    .right button {
+        transform: rotate(90deg);
+    }
+
+    p {
+        font-size: 15px;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    #score {
+        margin-bottom: 100px;
+    }
+
+    #restartBtn {
+        padding: 10px;
+        z-index: 2;
+    }
+
+    .footer {
+        margin-bottom: -100px;
+    }
+
+    #gameCanvas {
+        margin-top: 0;
+        margin-bottom: 100px;
+    }
+}
+ 
 
 button {
     margin: 10px;

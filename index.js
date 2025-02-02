@@ -3,6 +3,14 @@ function initStyles() {
     document.getElementById('score').style.display = 'block';
     document.getElementById('title').style.display = 'none';
     document.getElementById('footertext').style.display = 'flex';
+
+    const controls = document.getElementById('controlcontainer');
+    // Show container at start only if the viewport is small enough
+    if (window.innerWidth < 469) {
+        controls.style.display = 'flex';
+    } else {
+        controls.style.display = 'none';
+    }
 }
 
 const canvas = document.getElementById('gameCanvas');
@@ -28,6 +36,20 @@ let paused = false;
 
 // Movement happens in intervals. When the game ends, the interval is cleared.
 let moveInterval;
+
+
+// Debounce function to prevent rapid clicks / not a good approach for game mechanics
+
+// let lastKeyPressTime = 0;
+// const debounceTime = 200;
+
+// function debounceHandler(e) {
+//     const currentTime = Date.now();
+//     if (currentTime - lastKeyPressTime > debounceTime) {
+//         handleKeyPress(e);
+//         lastKeyPressTime = currentTime;
+//     }
+// }
 
 function togglePause() {
     paused = !paused;
@@ -74,7 +96,7 @@ function drawGame() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     // Dynamic rendering of the snake where the color is determined by the index of the segment in the snake array
     for (let i = 0; i < snake.length; i++) {
-        ctx.fillStyle = `hsl(${120 * i}, 70%, 60%)`;
+        ctx.fillStyle = `hsl(${60 * i}, 70%, 60%)`;
         // Green color: ctx.fillStyle = `green`; 
         ctx.fillRect(snake[i].x * gridSize, snake[i].y * gridSize, gridSize - 2, gridSize - 2);
     }
@@ -115,12 +137,71 @@ function placeFood() {
     }
 }
 
+function restartGame() {
+    clearInterval(moveInterval); // Clear the previous interval
+    snake = [];
+    score = 0;
+    over = false;
+    scoreElement.textContent = `Score: ${score}`;
+    document.getElementById('gameOver').style.display = 'none';
+    initGame();
+}
+
+// Variables to store movement directions
+let directionQueue = [];
+
+// Modified key press handler to enqueue direction
+function handleKeyPress(e) {
+    const direction = getDirectionFromKey(e.key);
+    
+    if (direction) {
+        if (!isOppositeDirection(direction)) {
+            if (directionQueue.length < 2) {
+                directionQueue.push(direction);
+            } else {
+                // If more than 2 keys are pressed, only keep the last two
+                directionQueue.shift(); // Remove the oldest
+                directionQueue.push(direction); // Add the latest
+            }
+        }
+    }
+}
+
+function getDirectionFromKey(key) {
+    switch (key) {
+        case 'ArrowUp':
+            return { dx: 0, dy: -1 };
+        case 'ArrowDown':
+            return { dx: 0, dy: 1 };
+        case 'ArrowLeft':
+            return { dx: -1, dy: 0 };
+        case 'ArrowRight':
+            return { dx: 1, dy: 0 };
+        default:
+            return null;
+    }
+}
+
+function isOppositeDirection(newDirection) {
+    return (newDirection.dx === -dx && newDirection.dy === 0) ||
+           (newDirection.dy === -dy && newDirection.dx === 0);
+}
+
+// Move the snake and apply direction changes from the queue
 function moveSnake() {
     if (!gameStarted || paused) return;
 
+    // Apply the next direction in the queue if available
+    if (directionQueue.length > 0) {
+        const nextDirection = directionQueue.shift();
+        dx = nextDirection.dx;
+        dy = nextDirection.dy;
+        console.log(dx, dy);
+    }
+
     const head = { x: snake[0].x + dx, y: snake[0].y + dy };
 
-    // With these settings the game ends if the snake runs into a wall.
+        // With these settings the game ends if the snake runs into a wall.
 
     // if (head.x < 0 || head.x >= canvas.width / gridSize ||
     //     head.y < 0 || head.y >= canvas.height / gridSize) {
@@ -131,13 +212,12 @@ function moveSnake() {
     //     clearInterval(moveInterval);
     // }
 
-    // An option to run through the walls:
+    // Check for collision with self
     if ((head.x < 0) || (head.x >= canvas.width / gridSize) || (head.y < 0) ||  (head.y >= canvas.height / gridSize)) {
         head.x = (head.x + canvas.width / gridSize) % (canvas.width / gridSize);
         head.y = (head.y + canvas.height / gridSize) % (canvas.height / gridSize);
     }
 
-    // Check for collision with itself
     for (let segment of snake) {
         if (head.x === segment.x && head.y === segment.y) {
             over = true;
@@ -151,6 +231,7 @@ function moveSnake() {
 
     snake.unshift(head);
 
+    // Check if snake eats the food
     if (head.x === food.x && head.y === food.y) {
         score += 10;
         scoreElement.textContent = `Score: ${score}`;
@@ -162,37 +243,18 @@ function moveSnake() {
     drawGame();
 }
 
-function restartGame() {
-    clearInterval(moveInterval); // Clear the previous interval
-    snake = [];
-    score = 0;
-    over = false;
-    scoreElement.textContent = `Score: ${score}`;
-    document.getElementById('gameOver').style.display = 'none';
-    initGame();
-}
-
-function handleKeyPress(e) {
-    switch (e.key) {
-        // Return statement prevents the opposite movements
-        case 'ArrowUp':
-            if (dy === 1) return;
-            dx = 0; dy = -1;
-            break;
-        case 'ArrowDown':
-            if (dy === -1) return;
-            dx = 0; dy = 1;
-            break;
-        case 'ArrowLeft':
-            if (dx === 1) return;
-            dx = -1; dy = 0;
-            break;
-        case 'ArrowRight':
-            if (dx === -1) return;
-            dx = 1; dy = 0;
-            break;
-    }
-}
-
 document.addEventListener('keydown', handleKeyPress);
+
 startBtn.addEventListener('click', initGame);
+
+// Stylings for snake / buttons
+//Random spawns
+//Enemies
+// Settings menu: food amount, snake speed, grid size, snake length etc.
+//Game over effects
+//Go back button above restart button
+//Different difficulty modes
+//Attach mobile buttons to game logic
+// Sound effects?
+// Leaderboard
+// Controller support

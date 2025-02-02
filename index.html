@@ -17,7 +17,20 @@
     <p id="score" class="score" hidden>Score: 0</p>
     <button onclick="initStyles()" id="startBtn">Start Game</button>
     <button id="restartBtn" onclick="restartGame()" hidden>Restart Game</button>
-    <footer>
+
+    <div class="controlcontainer" id="controlcontainer" hidden>
+        <div id="left" class="left">
+            <button id="controllerrighttup" class="controls" style= "margin-bottom: 70px;"><</button>
+            <button id="controllerrightdown" class="controls" style="margin-bottom: 70px;">></button>
+        </div>
+
+        <div id="right" class="right">
+            <button id="controlleftright" class="controls" style="margin-top: 70px;"><</button>
+            <button id="controllerleftleft" class="controls" style="margin-top: 70px;">></button>
+        </div>
+    </div>
+
+    <footer class="footer" id="footer">
         <div>
             <p id="footertext" style="display: none;">Tap on screen to pause</p>
         </div>
@@ -27,11 +40,3 @@
     </script>
 </body>
 </html>
-
-<!-- Only the latest keypress needs to register before the next drawgame cycle. Otherwise the keypresses can happen faster than the game can draw (game ends without snake moving). -->
- <!-- Stylings for snake -->
-   <!-- Random spawns -->
-    <!-- Enemies -->
-     <!-- Game over effects -->
-      <!-- Different difficulty modes -->
-       <!-- Buttons for mobile -->
