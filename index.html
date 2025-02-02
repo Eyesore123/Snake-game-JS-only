@@ -17,6 +17,11 @@
     <p id="score" class="score" hidden>Score: 0</p>
     <button onclick=initStyles() id="startBtn">Start Game</button>
     <button id="restartBtn" onclick=restartGame() hidden>Restart Game</button>
+    <footer>
+        <div>
+            <p id="footertext" style="display: none;">Tap on screen to pause</p>
+        </div>
+    </footer>
 
     <script>
 
@@ -24,6 +29,7 @@
             document.getElementById('gameCanvas').style.opacity = 1;
             document.getElementById('score').style.display = 'block';
             document.getElementById('title').style.display = 'none';
+            document.getElementById('footertext').style.display = 'flex';
         }
 
         const canvas = document.getElementById('gameCanvas');
@@ -43,9 +49,28 @@
         let score = 0;
         let gridSize = 20;
         let over = false;
+        let paused = false;
 
         // Movement happens in intervals. When the game ends, the interval is cleared.
         let moveInterval;
+
+        function togglePause() {
+            paused = !paused;
+            if (paused) {
+                clearInterval(moveInterval);
+            } else {
+                moveInterval = setInterval(moveSnake, 200);
+            }
+        }
+
+        function handleClick() {
+            console.log("clicked");
+            togglePause();
+        }
+
+        // Event listeners
+
+       document.getElementById('gameCanvas').addEventListener('click', handleClick);
 
         function restartGame() {
             snake = [];
@@ -53,7 +78,6 @@
             score = 0;
             scoreElement.textContent = `Score: ${score}`;
             document.getElementById('restartBtn').style.display = 'block';
-            clearInterval(moveInterval);
             document.getElementById('gameOver').style.display = 'none';
             initGame();
         }
@@ -79,7 +103,9 @@
             drawGame();
 
             // Move the snake every 200 milliseconds (5 moves per second)
+            if (!moveInterval) {
             moveInterval = setInterval(moveSnake, 200);
+            }
         }
 
         function drawGame() {
@@ -129,6 +155,8 @@
         }
 
         function moveSnake() {
+            if(!gameStarted || paused) return;
+
             const head = { x: snake[0].x + dx, y: snake[0].y + dy };
 
             // Currently the game ends if the snake runs into itself or the wall.
@@ -137,16 +165,18 @@
                 head.y < 0 || head.y >= canvas.height / gridSize) {
                 over = true;
                 if(over === true) {
-                    document.getElementById('gameOver').style.display = 'block';
+                    document.getElementById('gameOver').style.display = 'flex';
                 }
                 clearInterval(moveInterval);
             }
 
+            // Add an option to run through the walls.
+            
             for (let segment of snake) {
                 if (head.x === segment.x && head.y === segment.y) {
                     over = true;
                     if(over === true) {
-                        document.getElementById('gameOver').style.display = 'block';
+                        document.getElementById('gameOver').style.display = 'flex';
                     }
                     clearInterval(moveInterval);
                     return;

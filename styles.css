@@ -23,34 +23,38 @@ canvas {
 body {
     margin: 0;
     padding: 0;
-    height: auto;
     background-image: url('./Assets/snake.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-color: yellowgreen;
     display: flex;
-    height: 100vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-family: 'Courier New', Courier, monospace;
 }
 
-@media screen and (min-width: 1450px) {
+div {
+    display: flex;
+    min-width: 90vw;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (min-width: 1446px) {
     body {
     background-repeat: no-repeat;
-    background-size: 60%;
+    background-size: 70%;
     background-position: center;
     /* Stretch the background image */
     object-fit: cover;
     display: flex;
-    height: 100vh;
     flex-direction: column;
     align-items: center;
     }
     #gameCanvas {
-        width: 500px;
-        height: 500px;
+        width: 470px;
+        height: 470px;
         margin-top: 13vh;
     }
 
@@ -59,7 +63,7 @@ body {
     }
 }
 
-@media screen and (max-width: 440px) {
+@media screen and (max-width: 1446px) {
 
     #gameCanvas {
        scale: 0.85;
@@ -75,13 +79,21 @@ body {
         padding: 40px;
         font-size: 15px;
     }
+
+    p {
+       padding: 10px;   
+    }
+
+    #gameCanvas {
+        margin-top: 7vh;
+    }
 }
 
 button {
-    margin: 20px;
-    padding: 10px 20px;
+    margin: 10px;
+    padding: 14px 20px;
     background-color: white;
-    border-radius: 5%;
+    border-radius: 10px;
 }
 
 button:hover {
@@ -97,10 +109,22 @@ p {
     font-weight: bold;
 }
 
+
 h1 {
     font-size: 50px;
     display: flex;
     color: white;
     padding: 20px;
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+footer {
+    bottom: 0;
+}
+
+footer p {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
 }
