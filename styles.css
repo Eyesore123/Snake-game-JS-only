@@ -101,11 +101,11 @@ div {
 
     .controlcontainer {
         position: absolute;
-        bottom: 5vh;
+        bottom: 14vh;
         display: none;
         flex-direction: column;
         width: 200px;
-        height: 380px !important;
+        height: 230px !important;
         transform: rotate(90deg);
         gap: 100px;
     }
@@ -155,6 +155,19 @@ div {
 
     button#restartBtn {
         margin-bottom: 1vh;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    * {
+        scale: 0.9;
+
+        div#controlcontainer.controlcontainer {
+            width: 150px;
+            height: 180px !important;
+            gap: 80px;
+            margin-top: 100px;
+        }
     }
 }
 

@@ -280,7 +280,7 @@ startBtn.addEventListener('click', initGame);
 //Game over effects
 //Go back button above restart button
 //Different difficulty modes
-//Attach mobile buttons to game logic
 // Sound effects?
 // Leaderboard
 // Controller support
+// Button configuration for tablets
