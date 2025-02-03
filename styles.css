@@ -152,7 +152,22 @@ div {
         margin-bottom: 100px;
     }
 }
- 
+
+@media screen and (min-width: 1446px) {
+
+    #gameCanvas {
+       scale: 1.2;
+       margin-top: 20vh;
+    }
+
+    button#startBtn {
+        margin-top: 10vh;
+    }
+
+    p#score.score {
+        margin-top: 5vh;
+    }
+}
 
 button {
     margin: 10px;
