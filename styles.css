@@ -101,7 +101,7 @@ div {
 
     .controlcontainer {
         position: absolute;
-        bottom: 9vh;
+        bottom: 5vh;
         display: none;
         flex-direction: column;
         width: 200px;
@@ -112,10 +112,12 @@ div {
 
     #startBtn {
         z-index: 2;
+        margin-bottom: 20vh;
     }
 
     .left, .right {
         display: flex;
+        width: 200px;
         height: 200px;
     }
 
@@ -144,12 +146,15 @@ div {
     }
 
     .footer {
-        margin-bottom: -100px;
+        margin-bottom: -200px;
     }
 
     #gameCanvas {
-        margin-top: 0;
-        margin-bottom: 100px;
+        margin-top: -10vh;
+    }
+
+    button#restartBtn {
+        margin-bottom: 1vh;
     }
 }
 
@@ -171,7 +176,7 @@ div {
 
 button {
     margin: 10px;
-    padding: 14px 20px;
+    padding: 20px 20px;
     background-color: white;
     border-radius: 10px;
 }
@@ -207,4 +212,27 @@ footer p {
     display: flex;
     justify-content: center;
     font-size: 25px;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+}
+
+.arrow2 {
+    height: 20px;
+    width: 20px;
+}
+
+div#right.right {
+    transform: rotate(90deg);
+    margin-left: 50px;
+}
+
+.leftarrow {
+    transform: rotate(90deg);
+}
+
+.rightarrow {
+    transform: rotate(270deg);
 }

@@ -182,6 +182,32 @@ function getDirectionFromKey(key) {
     }
 }
 
+// Mobile controls
+const leftButton = document.querySelector('#controllerleftleft');
+const rightButton = document.querySelector('#controlleftright');
+const upButton = document.querySelector('#controllerrighttup');
+const downButton = document.querySelector('#controllerrightdown');
+
+leftButton.addEventListener('click', () => {
+  const leftArrowEvent = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
+  document.dispatchEvent(leftArrowEvent);
+});
+
+rightButton.addEventListener('click', () => {
+  const rightArrowEvent = new KeyboardEvent('keydown', { key: 'ArrowRight' });
+  document.dispatchEvent(rightArrowEvent);
+});
+
+upButton.addEventListener('click', () => {
+  const upArrowEvent = new KeyboardEvent('keydown', { key: 'ArrowUp' });
+  document.dispatchEvent(upArrowEvent);
+});
+
+downButton.addEventListener('click', () => {
+  const downArrowEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+  document.dispatchEvent(downArrowEvent);
+});
+
 function isOppositeDirection(newDirection) {
     return (newDirection.dx === -dx && newDirection.dy === 0) ||
            (newDirection.dy === -dy && newDirection.dx === 0);
