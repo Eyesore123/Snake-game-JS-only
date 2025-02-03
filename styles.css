@@ -10,6 +10,7 @@ body {
     align-items: center;
     justify-content: center;
     font-family: 'Courier New', Courier, monospace;
+    height: 100vh;
 }
 
 canvas {
@@ -25,7 +26,7 @@ canvas {
     display: inline-block;
     justify-content: center;
     margin: auto;
-    top: 9vh;
+    top: 6vh;
     color: black;
     font-weight: 900;
     font-size: 3em;
@@ -52,9 +53,9 @@ div {
     align-items: center;
     }
     #gameCanvas {
-        width: 470px;
-        height: 470px;
-        margin-top: 13vh;
+        width: 440px;
+        height: 440px;
+        margin-top: 11vh;
     }
 }
 
@@ -175,11 +176,12 @@ div {
 
     #gameCanvas {
        scale: 1.2;
-       margin-top: 20vh;
+       margin-top: 15vh;
     }
 
     button#startBtn {
-        margin-top: 10vh;
+        margin-top: -10vh;
+        z-index: 2;
     }
 
     p#score.score {
@@ -201,7 +203,7 @@ button:hover {
 
 p {
     color: white;
-    padding: 20px;
+    padding: 10px;
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
     font-size: 30px;
     font-weight: bold;
