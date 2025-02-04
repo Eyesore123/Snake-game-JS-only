@@ -20,8 +20,7 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 * Game over effects
 * Better tablet compatibility
 * Go back button above restart button
-* Different difficulty modes
-* Attach mobile buttons to game logic
+* Different difficulty modes / game gets faster
 * Sound effects
 * Leaderboard
 
