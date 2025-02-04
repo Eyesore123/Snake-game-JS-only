@@ -1,6 +1,8 @@
 let gamepadIndex = null;
 let controllerActive = false;
 
+// Add edge detection for start button!
+
 // Polling for gamepad inputs
 function updateGamepad() {
     const gamepads = navigator.getGamepads();
@@ -9,11 +11,13 @@ function updateGamepad() {
 
         if (gamepad) {
             const dPadUp = gamepad.buttons[12].pressed;
+            console.log(dPadUp);
             const dPadDown = gamepad.buttons[13].pressed;
             const dPadLeft = gamepad.buttons[14].pressed;
             const dPadRight = gamepad.buttons[15].pressed;
+            const startButton = gamepad.buttons[9].pressed;
 
-            // Handling D-Pad input
+     
             if (dPadUp) {
                 enqueueDirection({ dx: 0, dy: -1 });
             } else if (dPadDown) {
@@ -24,24 +28,31 @@ function updateGamepad() {
                 enqueueDirection({ dx: 1, dy: 0 });
             }
 
-            // Handling Analog Stick (Left Stick) input
-            const leftStickX = gamepad.axes[0]; // Horizontal axis (-1 to 1)
-            const leftStickY = gamepad.axes[1]; // Vertical axis (-1 to 1)
+            // Toggle pause logic comes here (start button)
 
-            // Set dead zone for analog stick to avoid accidental input
+            if (startButton) {
+                console.log("Start button pressed!");
+                togglePause();
+            }
+
+           
+            const leftStickX = gamepad.axes[0]; 
+            const leftStickY = gamepad.axes[1];
+
+            
             const deadZone = 0.2;
             if (Math.abs(leftStickX) > deadZone || Math.abs(leftStickY) > deadZone) {
                 if (Math.abs(leftStickX) > Math.abs(leftStickY)) {
                     if (leftStickX > 0) {
-                        enqueueDirection({ dx: 1, dy: 0 }); // Move right
+                        enqueueDirection({ dx: 1, dy: 0 });
                     } else {
-                        enqueueDirection({ dx: -1, dy: 0 }); // Move left
+                        enqueueDirection({ dx: -1, dy: 0 }); 
                     }
                 } else {
                     if (leftStickY > 0) {
-                        enqueueDirection({ dx: 0, dy: 1 }); // Move down
+                        enqueueDirection({ dx: 0, dy: 1 });
                     } else {
-                        enqueueDirection({ dx: 0, dy: -1 }); // Move up
+                        enqueueDirection({ dx: 0, dy: -1 });
                     }
                 }
             }
@@ -49,7 +60,6 @@ function updateGamepad() {
     }
 }
 
-// Add direction to queue
 function enqueueDirection(direction) {
     if (!isOppositeDirection(direction)) {
         if (directionQueue.length < 2) {
@@ -61,27 +71,22 @@ function enqueueDirection(direction) {
     }
 }
 
-// Check for new gamepads being connected
 window.addEventListener("gamepadconnected", (e) => {
     console.log("Gamepad connected:", e.gamepad);
     gamepadIndex = e.gamepad.index;
     controllerActive = true;
 });
 
-// Check for gamepads being disconnected
 window.addEventListener("gamepaddisconnected", (e) => {
     console.log("Gamepad disconnected:", e.gamepad);
     gamepadIndex = null;
     controllerActive = false;
 });
 
-// Call this function in your game loop to update gamepad state
 function gameLoop() {
     if (controllerActive) {
         updateGamepad();
     }
-    moveSnake();
-    // Call this function on every frame (like using requestAnimationFrame or setInterval)
     requestAnimationFrame(gameLoop);
 }
 
