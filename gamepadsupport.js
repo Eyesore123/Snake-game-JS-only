@@ -15,7 +15,7 @@ function updateGamepad() {
             const dPadDown = gamepad.buttons[13].pressed;
             const dPadLeft = gamepad.buttons[14].pressed;
             const dPadRight = gamepad.buttons[15].pressed;
-            // Edge detection for the start button
+            // Edge detection for the start button, startButtonWasPressed updates to false when the button is released
             let startButtonPressed = gamepad.buttons[9].pressed;
             if (startButtonPressed && !startButtonWasPressed) {
                 togglePause();
