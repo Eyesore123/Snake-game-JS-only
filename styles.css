@@ -30,8 +30,6 @@ canvas {
     color: black;
     font-weight: 900;
     font-size: 3em;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 div {
@@ -87,6 +85,10 @@ div {
     #gameOver {
         padding-bottom: 20px;
     }
+
+    div#right.right {
+        margin-right: 15px;
+    }
 }
 
 @media screen and (min-width: 1108px) {
@@ -102,7 +104,7 @@ div {
 
     .controlcontainer {
         position: absolute;
-        bottom: 14vh;
+        bottom: 13vh;
         display: none;
         flex-direction: column;
         width: 200px;
@@ -147,7 +149,7 @@ div {
     }
 
     .footer {
-        margin-bottom: -200px;
+        margin-bottom: -250px;
     }
 
     #gameCanvas {
@@ -157,9 +159,13 @@ div {
     button#restartBtn {
         margin-bottom: 1vh;
     }
+
+    h1 {
+        margin-top: -100px;
+    }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 389px) {
     * {
         scale: 0.9;
 
@@ -168,6 +174,11 @@ div {
             height: 180px !important;
             gap: 80px;
             margin-top: 100px;
+            margin-bottom: -50px;
+        }
+
+        div#gameOver.gameOver {
+            margin-top: -80px;
         }
     }
 }
@@ -241,6 +252,14 @@ footer p {
 
 div#right.right {
     transform: rotate(90deg);
+    margin-top: 30px;
+    margin-left: 105px;
+    margin-bottom: 30px;
+}
+
+div#left.left {
+    margin-bottom: -80px;
+    margin-top: 30px;
     margin-left: 50px;
 }
 
