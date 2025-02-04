@@ -59,7 +59,7 @@ div {
 @media screen and (max-width: 1446px) {
 
     #gameCanvas {
-       scale: 0.85;
+       scale: 0.8;
     }
 
     body {
@@ -90,7 +90,7 @@ div {
     }
 }
 
-@media screen and (min-width: 1108px) {
+@media screen and (min-width: 1446px) {
     .left, .right {
         display: none;
     }
@@ -103,11 +103,11 @@ div {
 
     .controlcontainer {
         position: absolute;
-        bottom: 16vh;
+        bottom: 19vh;
         display: none;
         flex-direction: column;
         width: 200px;
-        height: 230px !important;
+        height: 200px !important;
         transform: rotate(90deg);
         gap: 100px;
     }
@@ -152,7 +152,8 @@ div {
     }
 
     #gameCanvas {
-        margin-top: -24vh;
+        margin-top: -35vh;
+        scale: 0.75;
     }
 
     button#restartBtn {
