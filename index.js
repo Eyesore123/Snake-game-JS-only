@@ -63,6 +63,7 @@ function togglePause() {
 function handleClick() {
     console.log("clicked");
     togglePause();
+    console.log("Pause toggled");
 }
 
 // Event listeners

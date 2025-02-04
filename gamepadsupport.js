@@ -1,7 +1,7 @@
 let gamepadIndex = null;
 let controllerActive = false;
-
-// Add edge detection for start button!
+// This helps to keep track of the start button state:
+let startButtonWasPressed = false;
 
 // Polling for gamepad inputs
 function updateGamepad() {
@@ -15,9 +15,15 @@ function updateGamepad() {
             const dPadDown = gamepad.buttons[13].pressed;
             const dPadLeft = gamepad.buttons[14].pressed;
             const dPadRight = gamepad.buttons[15].pressed;
-            const startButton = gamepad.buttons[9].pressed;
+            // Edge detection for the start button
+            let startButtonPressed = gamepad.buttons[9].pressed;
+            if (startButtonPressed && !startButtonWasPressed) {
+                togglePause();
+                startButtonWasPressed = true;
+            } else if (!startButtonPressed) {
+                startButtonWasPressed = false;
+            }
 
-     
             if (dPadUp) {
                 enqueueDirection({ dx: 0, dy: -1 });
             } else if (dPadDown) {
@@ -27,14 +33,6 @@ function updateGamepad() {
             } else if (dPadRight) {
                 enqueueDirection({ dx: 1, dy: 0 });
             }
-
-            // Toggle pause logic comes here (start button)
-
-            if (startButton) {
-                console.log("Start button pressed!");
-                togglePause();
-            }
-
            
             const leftStickX = gamepad.axes[0]; 
             const leftStickY = gamepad.axes[1];
