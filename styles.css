@@ -107,7 +107,7 @@ div {
         display: none;
         flex-direction: column;
         width: 200px;
-        height: 200px !important;
+        height: 230px !important;
         transform: rotate(90deg);
         gap: 100px;
     }
@@ -162,6 +162,10 @@ div {
 
     h1 {
         margin-top: -100px;
+    }
+
+    body {
+        scale: 0.85;
     }
 }
 
