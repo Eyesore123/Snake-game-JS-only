@@ -103,7 +103,7 @@ div {
 
     .controlcontainer {
         position: absolute;
-        bottom: 19vh;
+        bottom: 19%;
         display: none;
         flex-direction: column;
         width: 200px;
