@@ -167,6 +167,10 @@ div {
     body {
         scale: 0.85;
     }
+
+    div#gameOver.gameOver {
+        margin-top: -80px;
+    }
 }
 
 @media screen and (max-width: 389px) {
@@ -189,7 +193,7 @@ div {
         }
 
         div#gameOver.gameOver {
-            margin-top: -80px;
+            margin-top: -140px;
         }
 
         * {
