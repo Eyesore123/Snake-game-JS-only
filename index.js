@@ -22,6 +22,7 @@ const restartBtn = document.getElementById('restartBtn');
 let gameStarted = false;
 let snake = [];
 let food = {};
+let gameOverFlag = false;
 
 // Movement variables (speed on the x and y axis)
 // Only one can be active at a time, otherwise the snake would move diagonally
@@ -89,7 +90,11 @@ function initGame() {
     moveInterval = setInterval(moveSnake, 200);
 
     placeFood();
-    drawGame();
+    if (gameOverFlag) {
+        flashCanvas();
+    } else {
+        drawGame();
+    }
 }
 
 function drawGame() {
@@ -139,12 +144,14 @@ function placeFood() {
 }
 
 function restartGame() {
+    clearInterval(flashInterval);
     clearInterval(moveInterval); // Clear the previous interval
     snake = [];
     score = 0;
     over = false;
     scoreElement.textContent = `Score: ${score}`;
     document.getElementById('gameOver').style.display = 'none';
+    gameOverFlag = false;
     initGame();
 }
 
@@ -250,6 +257,9 @@ function moveSnake() {
             over = true;
             if (over === true) {
                 document.getElementById('gameOver').style.display = 'flex';
+                gameOverFlag = true;
+                console.log("Game Over flag set to true");
+                flashCanvas();
             }
             clearInterval(moveInterval);
             return;
@@ -270,6 +280,24 @@ function moveSnake() {
     drawGame();
 }
 
+let flashInterval;  // Variable to store the flashing interval
+
+function flashCanvas() {
+    console.log("Flashing canvas...");
+    let flashing = true;
+    flashInterval = setInterval(() => {
+        if (flashing) {
+            // Flash white
+            ctx.fillStyle = `rgb(255, 255, 255, 0.3)`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        } else {
+            // Restore the game canvas
+            drawGame();
+        }
+        flashing = !flashing;  // Toggle the flashing state
+    }, 1100);  // Flash every 500 milliseconds (adjust as needed)
+}
+
 document.addEventListener('keydown', handleKeyPress);
 
 startBtn.addEventListener('click', initGame);
@@ -283,5 +311,6 @@ startBtn.addEventListener('click', initGame);
 //Different difficulty modes
 // Sound effects?
 // Leaderboard
-// Controller support
+// Customizable controls
+// Customizable snake color
 // Button configuration for tablets

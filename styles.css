@@ -17,7 +17,11 @@ canvas {
     border: 2px solid yellowgreen;
     z-index: 1;
     background-color: white;
-    opacity: 0
+    opacity: 0;
+}
+
+.flash {
+    animation: flash 2s infinite;
 }
 
 #gameOver {
