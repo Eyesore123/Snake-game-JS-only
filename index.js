@@ -20,6 +20,7 @@ const startBtn = document.getElementById('startBtn');
 const restartBtn = document.getElementById('restartBtn');
 
 let gameStarted = false;
+
 let snake = [];
 let food = {};
 let gameOverFlag = false;
@@ -52,6 +53,8 @@ let moveInterval;
 //     }
 // }
 
+// Change the background every 10 seconds
+let backgroundInterval = setInterval(changeBackground, 10000);
 function togglePause() {
     paused = !paused;
     if (paused) {
@@ -74,6 +77,11 @@ function initGame() {
     // Dynamic buttons:
     restartBtn.style.display = 'block';
     startBtn.style.display = 'none';
+    landingpagefooter.style.display = "none";
+
+    // Reset bg change interval
+
+    clearInterval(backgroundInterval);
 
     // Reset game state
     gameStarted = true;
@@ -98,12 +106,19 @@ function initGame() {
 }
 
 function drawGame() {
+
+    const body = document.body;
+    // Background goes back to default when game starts:
+    if (gameStarted) {
+    body.style.backgroundImage = "url('./Assets/snake.webp')";
+    }
+
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     // Dynamic rendering of the snake where the color is determined by the index of the segment in the snake array
     for (let i = 0; i < snake.length; i++) {
         ctx.fillStyle = `hsl(${60 * i}, 70%, 60%)`;
-        // Green color: ctx.fillStyle = `green`; 
+        // Green color snake: ctx.fillStyle = `green`; 
         ctx.fillRect(snake[i].x * gridSize, snake[i].y * gridSize, gridSize - 2, gridSize - 2);
     }
 
@@ -167,9 +182,8 @@ function handleKeyPress(e) {
             if (directionQueue.length < 2) {
                 directionQueue.push(direction);
             } else {
-                // If more than 2 keys are pressed, only keep the last two
-                directionQueue.shift(); // Remove the oldest
-                directionQueue.push(direction); // Add the latest
+                directionQueue.shift();
+                directionQueue.push(direction);
             }
         }
     }
@@ -280,33 +294,75 @@ function moveSnake() {
     drawGame();
 }
 
-let flashInterval;  // Variable to store the flashing interval
+let flashInterval;
 
 function flashCanvas() {
     console.log("Flashing canvas...");
     let flashing = true;
     flashInterval = setInterval(() => {
         if (flashing) {
-            // Flash white
             ctx.fillStyle = `rgb(255, 255, 255, 0.3)`;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
         } else {
-            // Restore the game canvas
             drawGame();
         }
-        flashing = !flashing;  // Toggle the flashing state
-    }, 1100);  // Flash every 500 milliseconds (adjust as needed)
+        flashing = !flashing;
+    }, 1100);
 }
 
 document.addEventListener('keydown', handleKeyPress);
 
 startBtn.addEventListener('click', initGame);
 
+let currentBackground = 1;
+
+function changeBackground() {
+    const body = document.body;
+
+    if (currentBackground === 1) {
+    body.style.backgroundImage = "url('./Assets/snake_2.webp')";
+    currentBackground = 2;
+    } else if (currentBackground === 2) {
+    body.style.backgroundImage = "url('./Assets/snake_3.webp')";
+    currentBackground = 3;
+    } else if (currentBackground === 3) {
+    body.style.backgroundImage = "url('./Assets/snake_4.webp')";
+    currentBackground = 4;
+    } else if (currentBackground === 4) {
+    body.style.backgroundImage = "url('./Assets/snake_5.webp')";
+    currentBackground = 5;
+    } else if (currentBackground === 5) {
+    body.style.backgroundImage = "url('./Assets/snake_6.webp')";
+    currentBackground = 6;
+    } else {
+    body.style.backgroundImage = "url('./Assets/snake.webp')";
+    currentBackground = 1;
+    }
+}
+
+function changeBackgroundWithEffect() {
+    const body = document.body;
+    if (score === 120) {
+        body.style.backgroundImage = "url('./Assets/snake_2.webp')";
+    }
+
+}
+
+function difficultyIncrease() {
+    // Increase the speed of the snake and change the background when the point counter reaches a certain value. Also pause the game while the background changes.
+
+    if (score === 120) {
+        clearInterval(moveInterval);
+        moveInterval = setInterval(moveSnake, 150);
+        changeBackgroundWithEffect();
+    }
+    
+}
+
 // Stylings for snake / buttons
 //Random spawns
 //Enemies
 // Settings menu: food amount, snake speed, grid size, snake length etc.
-//Game over effects
 //Go back button above restart button
 //Different difficulty modes
 // Sound effects?

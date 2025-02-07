@@ -24,5 +24,6 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 * Leaderboard
 * Customizable controls
 * Customizable snake color
+* Music that sets the right atmosphere
 
 ![snake_game](https://github.com/user-attachments/assets/3d1b71c4-b47f-4c88-9c7c-94a64268d78b)

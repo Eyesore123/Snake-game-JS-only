@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Snake Game</title>
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="landingpagefooter.css">
 </head>
-<body>
+<body id="body">
     <h1 class="title" id="title">Snake Game</h1>
     <!-- Game over -->
     <div class="gameOver" id="gameOver" style="display: none;">
@@ -59,6 +60,33 @@
             <p id="footertext" style="display: none;">Tap on screen to pause</p>
         </div>
     </footer>
+
+    <!-- Landing page footer, hidden by default, used like a component -->
+    <footer class="landingpagefooter" id="landingpagefooter" style="display: block;">
+        <div class="footerdiv" id="footerdiv">
+            <p class="game1" style="color: black;" id="game1">Check out my other games:
+            </p>
+            <p class="game2" id="game2">
+                <a href="https://math-puzzle-game-ashy.vercel.app/" target="_blank">Math Puzzle Game</a>
+            </p>
+            <p class="game3" id="game3">
+                <a href="https://memory-game-topaz-pi.vercel.app/" target="_blank">Memory Game</a>
+            </p>
+            <!-- Github link with an icon here: -->
+            <p class="github" id="github">
+                <a href="https://github.com/Eyesore123" target="_blank">
+                <img src="/Assets/github-mark.png" alt="Github Icon" class="githubicon" id="githubicon" />
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const landingpagefooter = document.getElementById('landingpagefooter');
+        landingpagefooter.addEventListener('click', function() {
+            landingpagefooter.style.display = (landingpagefooter.style.display === 'none') ? 'block' : 'none';
+        });
+    </script>
 
     <script src="index.js"></script>
     <script src="gamepadsupport.js"></script>
