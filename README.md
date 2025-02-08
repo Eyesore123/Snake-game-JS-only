@@ -12,7 +12,7 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 - **Game Over Screen:** See your final score and think about your performance.
 - **Music and sound effects** Amazing soundtrack, game sounds and customizable sound volume!
 - **Changing backgrounds** Nice snake themed backgrounds!
-- **Mobile Compatibility:** Play the game on your mobile device.
+- **Mobile Compatibility:** Play the game on your mobile device (tablets and very small phone devices might not display correctly)
 - **Gamepad Support:** Play the game using a gamepad for an even more immersive experience.
 
 ## Planned improvements
@@ -27,6 +27,9 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 * Leaderboard
 * Customizable controls
 * Customizable snake color
+
+![snake_game2](https://github.com/user-attachments/assets/67f92ca1-3c2f-4061-a68d-472d3be7adbc)
+
 
 ![snake_game](https://github.com/user-attachments/assets/3d1b71c4-b47f-4c88-9c7c-94a64268d78b)
 
