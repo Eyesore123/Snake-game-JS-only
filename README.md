@@ -17,12 +17,14 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 
 ## Planned improvements
 
+* Change of location for "Tap on screen to pause for smart phones"
+* Change of volume icon after volume is toggled off
 * Better stylings for snake / buttons
 * Random spawns for snake
 * Enemies
 * Settings menu: food amount, snake speed, grid size, snake length etc.
 * Better tablet compatibility
-* Settings menu with lots of settings + sound toggle
+* Settings menu with lots of settings + backdrop
 * Different difficulty modes / game gets faster
 * Leaderboard
 * Customizable controls
