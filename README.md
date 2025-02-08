@@ -11,17 +11,18 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 - **Score Tracking:** Keep track of your score as you progress through the game.
 - **Game Over Screen:** See your final score and think about your performance.
 - **Music and sound effects** Amazing soundtrack, game sounds and customizable sound volume!
+- **Changing backgrounds** Nice snake themed backgrounds!
 - **Mobile Compatibility:** Play the game on your mobile device.
 - **Gamepad Support:** Play the game using a gamepad for an even more immersive experience.
 
 ## Planned improvements
 
-* Stylings for snake / buttons
+* Better stylings for snake / buttons
 * Random spawns for snake
 * Enemies
 * Settings menu: food amount, snake speed, grid size, snake length etc.
 * Better tablet compatibility
-* Go back button in the settings menu
+* Settings menu with lots of settings + sound toggle
 * Different difficulty modes / game gets faster
 * Leaderboard
 * Customizable controls
