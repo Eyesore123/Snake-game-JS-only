@@ -3,6 +3,7 @@ const ctx = canvas.getContext('2d');
 const scoreElement = document.getElementById('score');
 const startBtn = document.getElementById('startBtn');
 const restartBtn = document.getElementById('restartBtn');
+const cogcontainer = document.getElementById('cogcontainer');
 let soundEnabled = true;
 const soundtrack = new Audio('/Assets/soundtrack.mp3');
 soundtrack.loop = true;
@@ -33,11 +34,15 @@ function preloadImages() {
 document.addEventListener('DOMContentLoaded', preloadImages);
 
 function initStyles() {
+
     document.getElementById('gameCanvas').style.opacity = 1;
     document.getElementById('score').style.display = 'block';
     document.getElementById('title').style.display = 'none';
     document.getElementById('footertext').style.display = 'flex';
     document.getElementById('footer').style.display = 'flex';
+
+    // Experimental:
+    document.getElementById('cogcontainer').style.setProperty('bottom', '10px', 'important');
 
     const controls = document.getElementById('controlcontainer');
     controls.style.display = 'flex';
@@ -428,7 +433,7 @@ soundEnabled = !soundEnabled;
 //Random spawns
 //Enemies
 // Settings menu: food amount, snake speed, grid size, snake length etc.
-//Go back button above restart button
+//Go back button in setting menu
 //Different difficulty modes
 // Leaderboard
 // Customizable controls
