@@ -50,7 +50,7 @@ div {
 }
 
 .cog {
-    z-index: 2;
+    z-index: 3;
     width: 40px;
     height: 40px;
 }
@@ -63,7 +63,17 @@ div {
     right: 0;
     bottom: 10px;
     width: 100%;
+    z-index: 1;
     gap: 40px;
+}
+
+#settingsbutton {
+    padding: 2px;
+    margin: 0;
+}
+
+#settingsbutton:hover {
+    cursor: pointer;
 }
 
 @media screen and (min-width: 1446px) {
@@ -78,8 +88,8 @@ div {
     align-items: center;
     }
     #gameCanvas {
-        width: 440px;
-        height: 440px;
+        width: 400px;
+        height: 400px;
         margin-top: 11vh;
     }
 }
@@ -237,6 +247,10 @@ div {
 
         * {
             scale: 0.9;
+        }
+
+        .cogcontainer {
+            margin-bottom: 10px;
         }
     }
 

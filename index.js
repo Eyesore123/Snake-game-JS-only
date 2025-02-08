@@ -37,7 +37,7 @@ function initStyles() {
     document.getElementById('score').style.display = 'block';
     document.getElementById('title').style.display = 'none';
     document.getElementById('footertext').style.display = 'flex';
-    
+    document.getElementById('cogcontainer').style.display = 'flex';
 
     const controls = document.getElementById('controlcontainer');
 
