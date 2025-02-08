@@ -1,11 +1,46 @@
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+const scoreElement = document.getElementById('score');
+const startBtn = document.getElementById('startBtn');
+const restartBtn = document.getElementById('restartBtn');
+
+const soundtrack = new Audio('/Assets/soundtrack.mp3');
+soundtrack.loop = true;
+soundtrack.currentTime = 9.5;
+soundtrack.volume = 0.15;
+
+const eatSound = new Audio('/Assets/eat.mp3');
+eatSound.volume = 0.2;
+const gameOverSound = new Audio('/Assets/lose.mp3');
+gameOverSound.volume = 0.6;
+
+const backgroundImages = [
+    './Assets/snake.webp',
+    './Assets/snake_2.webp',
+    './Assets/snake_3.webp',
+    './Assets/snake_4.webp',
+    './Assets/snake_5.webp',
+    './Assets/snake_6.webp'
+];
+
+function preloadImages() {
+    backgroundImages.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', preloadImages);
+
 function initStyles() {
     document.getElementById('gameCanvas').style.opacity = 1;
     document.getElementById('score').style.display = 'block';
     document.getElementById('title').style.display = 'none';
     document.getElementById('footertext').style.display = 'flex';
+    
 
     const controls = document.getElementById('controlcontainer');
-    // Show container at start only if the viewport is small enough
+
     if (window.innerWidth < 469) {
         controls.style.display = 'flex';
     } else {
@@ -13,11 +48,6 @@ function initStyles() {
     }
 }
 
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-const scoreElement = document.getElementById('score');
-const startBtn = document.getElementById('startBtn');
-const restartBtn = document.getElementById('restartBtn');
 
 let gameStarted = false;
 
@@ -74,6 +104,7 @@ function handleClick() {
 document.getElementById('gameCanvas').addEventListener('click', handleClick);
 
 function initGame() {
+    soundtrack.play();
     // Dynamic buttons:
     restartBtn.style.display = 'block';
     startBtn.style.display = 'none';
@@ -239,6 +270,27 @@ function isOppositeDirection(newDirection) {
 function moveSnake() {
     if (!gameStarted || paused) return;
 
+    // if (score === 10) {
+    //     paused = true;
+        
+    //     const warning = document.createElement('div');
+    //     warning.textContent = "Speed increasing!";
+    //     warning.style.position = 'absolute';
+    //     warning.style.fontSize = '2em';
+    //     warning.style.color = 'red';
+    //     warning.style.top = '50%';
+    //     warning.style.left = '50%';
+    //     warning.style.transform = 'translate(-50%, -50%)';
+    //     document.body.appendChild(warning);
+
+    //     setTimeout(() => {
+    //         paused = false;
+    //         document.body.removeChild(warning);
+    //         clearInterval(moveInterval);
+    //         moveInterval = setInterval(moveSnake, 100); // Much faster!
+    //     }, 1000); // Shorter pause
+    // }
+
     // Apply the next direction in the queue if available
     if (directionQueue.length > 0) {
         const nextDirection = directionQueue.shift();
@@ -270,6 +322,7 @@ function moveSnake() {
         if (head.x === segment.x && head.y === segment.y) {
             over = true;
             if (over === true) {
+                gameOverSound.play();
                 document.getElementById('gameOver').style.display = 'flex';
                 gameOverFlag = true;
                 console.log("Game Over flag set to true");
@@ -284,9 +337,11 @@ function moveSnake() {
 
     // Check if snake eats the food
     if (head.x === food.x && head.y === food.y) {
+        eatSound.play();
         score += 10;
         scoreElement.textContent = `Score: ${score}`;
         placeFood();
+
     } else {
         snake.pop();
     }
@@ -340,32 +395,12 @@ function changeBackground() {
     }
 }
 
-function changeBackgroundWithEffect() {
-    const body = document.body;
-    if (score === 120) {
-        body.style.backgroundImage = "url('./Assets/snake_2.webp')";
-    }
-
-}
-
-function difficultyIncrease() {
-    // Increase the speed of the snake and change the background when the point counter reaches a certain value. Also pause the game while the background changes.
-
-    if (score === 120) {
-        clearInterval(moveInterval);
-        moveInterval = setInterval(moveSnake, 150);
-        changeBackgroundWithEffect();
-    }
-    
-}
-
 // Stylings for snake / buttons
 //Random spawns
 //Enemies
 // Settings menu: food amount, snake speed, grid size, snake length etc.
 //Go back button above restart button
 //Different difficulty modes
-// Sound effects?
 // Leaderboard
 // Customizable controls
 // Customizable snake color

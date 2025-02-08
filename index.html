@@ -4,83 +4,92 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Snake Game</title>
+<audio id="soundtrack" src="Assets/soundtrack.mp3" loop></audio>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="landingpagefooter.css">
 </head>
 <body id="body">
-    <h1 class="title" id="title">Snake Game</h1>
-    <!-- Game over -->
-    <div class="gameOver" id="gameOver" style="display: none;">
-        GAME OVER
+    <div class="cogcontainer">
+        <svg data-slot="icon" class="cog" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.559.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.894.149c-.424.07-.764.383-.929.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.35.272-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894Z" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <svg data-slot="icon" class=" cog" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
     </div>
+        <h1 class="title" id="title">Snake Game</h1>
+        <!-- Game over -->
+        <div class="gameOver" id="gameOver" style="display: none;">
+            GAME OVER
+        </div>
 
-    <canvas id="gameCanvas" class="flash" width="400" height="400"></canvas>
-    <p id="score" class="score" hidden>Score: 0</p>
-    <button onclick="initStyles()" id="startBtn">Start Game</button>
-    <button id="restartBtn" onclick="restartGame()" hidden>Restart Game</button>
+        <canvas id="gameCanvas" class="flash" width="400" height="400"></canvas>
+        <p id="score" class="score" hidden>Score: 0</p>
+        <button onclick="initStyles()" id="startBtn">Start Game</button>
+        <button id="restartBtn" onclick="restartGame()" hidden>Restart Game</button>
 
-    <div class="controlcontainer" id="controlcontainer" hidden>
-        <div id="left" class="left">
-            <button id="controllerrighttup" class="controls up" style= "margin-bottom: 70px;">
-            
-                <svg class="arrow2 uparrow"data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15.75 19.5 8.25 12l7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        <div class="controlcontainer" id="controlcontainer" hidden>
+            <div id="left" class="left">
+                <button id="controllerrighttup" class="controls up" style= "margin-bottom: 70px;">
+                
+                    <svg class="arrow2 uparrow"data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.75 19.5 8.25 12l7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+
+                </button>
+                <button id="controllerrightdown" class="controls down" style="margin-bottom: 70px;">
+
+                    <svg class="arrow2 downarrow" data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="m8.25 4.5 7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
 
-            </button>
-            <button id="controllerrightdown" class="controls down" style="margin-bottom: 70px;">
+                </button>
+            </div>
 
-                <svg class="arrow2 downarrow" data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="m8.25 4.5 7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg>
-
-            </button>
-        </div>
-
-        <div id="right" class="right">
-            <button id="controlleftright" class="controls" style="margin-top: 70px;">
-            
-                <svg class="arrow rightarrow"data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.75 19.5 8.25 12l7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
+            <div id="right" class="right">
+                <button id="controlleftright" class="controls" style="margin-top: 70px;">
                 
-            </button>
-            <button id="controllerleftleft" class="controls" style="margin-top: 70px;">
-
-                <svg class="arrow leftarrow" data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="arrow rightarrow"data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15.75 19.5 8.25 12l7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg>
+                    </svg>
+                    
+                </button>
+                <button id="controllerleftleft" class="controls" style="margin-top: 70px;">
 
-            </button>
+                    <svg class="arrow leftarrow" data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.75 19.5 8.25 12l7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+
+                </button>
+            </div>
         </div>
-    </div>
 
-    <footer class="footer" id="footer">
-        <div class="footerdiv" style="margin-bottom: 10px;">
-            <p id="footertext" style="display: none;">Tap on screen to pause</p>
-        </div>
-    </footer>
+        <footer class="footer" id="footer">
+            <div class="footerdiv" style="margin-bottom: 10px;">
+                <p id="footertext" style="display: none;">Tap on screen to pause</p>
+            </div>
+        </footer>
 
-    <!-- Landing page footer, hidden by default, used like a component -->
-    <footer class="landingpagefooter" id="landingpagefooter" style="display: block;">
-        <div class="footerdiv" id="footerdiv">
-            <p class="game1" style="color: black;" id="game1">Check out my other games:
-            </p>
-            <p class="game2" id="game2">
-                <a href="https://math-puzzle-game-ashy.vercel.app/" target="_blank">Math Puzzle Game</a>
-            </p>
-            <p class="game3" id="game3">
-                <a href="https://memory-game-topaz-pi.vercel.app/" target="_blank">Memory Game</a>
-            </p>
-            <!-- Github link with an icon here: -->
-            <p class="github" id="github">
-                <a href="https://github.com/Eyesore123" target="_blank">
-                <img src="/Assets/github-mark.png" alt="Github Icon" class="githubicon" id="githubicon" />
-                </a>
-            </p>
-        </div>
-    </footer>
-
+        <!-- Landing page footer, hidden by default, used like a component -->
+        <footer class="landingpagefooter" id="landingpagefooter" style="display: block;">
+            <div class="footerdiv" id="footerdiv">
+                <p class="game1" style="color: black;" id="game1">Check out my other games:
+                </p>
+                <p class="game2" id="game2">
+                    <a href="https://math-puzzle-game-ashy.vercel.app/" target="_blank">Math Puzzle Game</a>
+                </p>
+                <p class="game3" id="game3">
+                    <a href="https://memory-game-topaz-pi.vercel.app/" target="_blank">Memory Game</a>
+                </p>
+                <!-- Github link with an icon here: -->
+                <p class="github" id="github">
+                    <a href="https://github.com/Eyesore123" target="_blank">
+                    <img src="/Assets/github-mark.png" alt="Github Icon" class="githubicon" id="githubicon" />
+                    </a>
+                </p>
+            </div>
+        </footer>
     <script>
         const landingpagefooter = document.getElementById('landingpagefooter');
         landingpagefooter.addEventListener('click', function() {

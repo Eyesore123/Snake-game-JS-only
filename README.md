@@ -9,7 +9,10 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 - **Easy Controls:** Use the arrow keys to control the snake's movement.
 - **Smooth gameplay:** Smooth gameplay that feels responsive and intuitive.
 - **Score Tracking:** Keep track of your score as you progress through the game.
+- **Game Over Screen:** See your final score and think about your performance.
+- **Music and sound effects** Amazing soundtrack, game sounds and customizable sound volume!
 - **Mobile Compatibility:** Play the game on your mobile device.
+- **Gamepad Support:** Play the game using a gamepad for an even more immersive experience.
 
 ## Planned improvements
 
@@ -20,10 +23,16 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 * Better tablet compatibility
 * Go back button in the settings menu
 * Different difficulty modes / game gets faster
-* Sound effects
 * Leaderboard
 * Customizable controls
 * Customizable snake color
-* Music that sets the right atmosphere
 
 ![snake_game](https://github.com/user-attachments/assets/3d1b71c4-b47f-4c88-9c7c-94a64268d78b)
+
+Game sounds are from Zapsplat.
+
+Soundtrack is h6itam - FUNK OSCURO SUPERSLOWED
+
+On Youtube:
+
+<a href="https://www.youtube.com/watch?v=xmRVFNv_DGs">Music</a>
