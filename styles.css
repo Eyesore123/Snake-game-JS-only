@@ -66,6 +66,10 @@ div {
     gap: 40px;
 }
 
+.controlcontainer {
+    display: none;
+}
+
 #settingsbutton {
     padding: 2px;
     margin: 0;
@@ -141,7 +145,6 @@ div {
     .controlcontainer {
         position: absolute;
         bottom: 19%;
-        display: none;
         flex-direction: column;
         width: 200px;
         height: 230px !important;

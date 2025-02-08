@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 const scoreElement = document.getElementById('score');
 const startBtn = document.getElementById('startBtn');
 const restartBtn = document.getElementById('restartBtn');
-
+let soundEnabled = true;
 const soundtrack = new Audio('/Assets/soundtrack.mp3');
 soundtrack.loop = true;
 soundtrack.currentTime = 9.5;
@@ -37,9 +37,9 @@ function initStyles() {
     document.getElementById('score').style.display = 'block';
     document.getElementById('title').style.display = 'none';
     document.getElementById('footertext').style.display = 'flex';
-    document.getElementById('cogcontainer').style.display = 'flex';
 
     const controls = document.getElementById('controlcontainer');
+    controls.style.display = 'flex';
 
     if (window.innerWidth < 469) {
         controls.style.display = 'flex';
@@ -393,6 +393,19 @@ function changeBackground() {
     body.style.backgroundImage = "url('./Assets/snake.webp')";
     currentBackground = 1;
     }
+}
+
+function handleSoundToggle() {
+    if (soundEnabled) {
+        soundtrack.pause();
+        eatSound.volume = 0;
+        gameOverSound.volume = 0;
+    } else {
+        soundtrack.play();
+        eatSound.volume = 0.2;
+        gameOverSound.volume = 0.6;
+    }
+soundEnabled = !soundEnabled;
 }
 
 // Stylings for snake / buttons
