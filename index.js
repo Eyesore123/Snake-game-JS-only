@@ -37,6 +37,7 @@ function initStyles() {
     document.getElementById('score').style.display = 'block';
     document.getElementById('title').style.display = 'none';
     document.getElementById('footertext').style.display = 'flex';
+    document.getElementById('footer').style.display = 'flex';
 
     const controls = document.getElementById('controlcontainer');
     controls.style.display = 'flex';
@@ -318,10 +319,13 @@ function moveSnake() {
         head.y = (head.y + canvas.height / gridSize) % (canvas.height / gridSize);
     }
 
+    const footer = document.getElementById('footer');
+
     for (let segment of snake) {
         if (head.x === segment.x && head.y === segment.y) {
             over = true;
             if (over === true) {
+                footer.style.display = 'none';
                 gameOverSound.play();
                 document.getElementById('gameOver').style.display = 'flex';
                 gameOverFlag = true;
@@ -396,14 +400,26 @@ function changeBackground() {
 }
 
 function handleSoundToggle() {
+
+    const soundButton1 = document.getElementById('soundicon1');
+    const soundButton2 = document.getElementById('soundicon2');
+
+    // Toggle the sound button icon
+    
+
     if (soundEnabled) {
         soundtrack.pause();
         eatSound.volume = 0;
         gameOverSound.volume = 0;
+        soundButton1.style.display = 'none';
+        soundButton2.style.display = 'block';
     } else {
         soundtrack.play();
         eatSound.volume = 0.2;
         gameOverSound.volume = 0.6;
+        soundButton2.style.display = 'none';
+        soundButton1.style.display = 'block';
+
     }
 soundEnabled = !soundEnabled;
 }
