@@ -103,6 +103,15 @@ div {
     }
 }
 
+@media screen and (max-width: 600px) {
+   .footer {
+        top: -3%;
+    }
+    #restartBtn {
+    margin-bottom: 60px;
+    }
+}
+
 @media screen and (max-width: 1446px) {
 
     #gameCanvas {
@@ -191,7 +200,6 @@ div {
 
     button#restartBtn {
         padding: 10px;
-        margin-bottom: 40px;
         z-index: 2;
     }
 
