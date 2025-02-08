@@ -82,7 +82,7 @@ div {
 .footer {
     position: fixed;
     display: none;
-    top: 5%;
+    top: 2%;
 }
 
 @media screen and (min-width: 1446px) {
@@ -189,8 +189,9 @@ div {
         margin-bottom: 140px;
     }
 
-    #restartBtn {
+    button#restartBtn {
         padding: 10px;
+        margin-bottom: 40px;
         z-index: 2;
     }
 
@@ -198,10 +199,6 @@ div {
     #gameCanvas {
         margin-top: 0vh;
         scale: 0.75;
-    }
-
-    button#restartBtn {
-        margin-bottom: 1vh;
     }
 
     body {
