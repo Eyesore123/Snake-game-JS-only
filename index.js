@@ -166,7 +166,9 @@ function drawGame() {
     const body = document.body;
     // Background goes back to default when game starts:
     if (gameStarted) {
-    body.style.backgroundImage = "url('./Assets/snake.webp')";
+        if(body.style.backgroundImage !== "url('./Assets/snake.webp')" && score === 0) {
+            body.style.backgroundImage = "url('./Assets/snake.webp')";
+        }
     }
 
     ctx.fillStyle = 'black';
@@ -372,6 +374,9 @@ function moveSnake() {
     if (head.x === food.x && head.y === food.y) {
         eatSound.play();
         score += 10;
+        if (score === 100 || score === 200 || score === 300 || score === 400 || score === 500) {
+            changeBackgroundInGame(score);
+        }
         scoreElement.textContent = `Score: ${score}`;
         placeFood();
 
@@ -405,6 +410,7 @@ startBtn.addEventListener('click', initGame);
 let currentBackground = 1;
 
 function changeBackground() {
+    if (gameStarted) return;
     const body = document.body;
 
     if (currentBackground === 1) {
@@ -453,6 +459,51 @@ function handleSoundToggle() {
 soundEnabled = !soundEnabled;
 }
 
+// Changing backgrounds
+
+function changeBackgroundInGame(score) {
+    // Remove bg image:
+    clearInterval(backgroundInterval); // Clear the interval if there is one
+    console.log('changeBackground called');
+    const body = document.body;
+    let imageIndex;
+
+    console.log(`Score: ${score}`);
+
+    // Determine the image index based on the score ranges
+    if (score >= 500) {
+        imageIndex = 5; // snake_6.webp
+        clearInterval(moveInterval);
+        moveInterval = setInterval(moveSnake, 100);
+    } else if (score >= 400) {
+        imageIndex = 4; // snake_5.webp
+        clearInterval(moveInterval);
+        moveInterval = setInterval(moveSnake, 120);
+    } else if (score >= 300) {
+        imageIndex = 3; // snake_4.webp
+        clearInterval(moveInterval);
+        moveInterval = setInterval(moveSnake, 140);
+    } else if (score >= 200) {
+        imageIndex = 2; // snake_3.webp
+        clearInterval(moveInterval);
+        moveInterval = setInterval(moveSnake, 160);
+    } else if (score >= 100) {
+        imageIndex = 1; // snake_2.webp
+        clearInterval(moveInterval);
+        moveInterval = setInterval(moveSnake, 180);
+    } else {
+        imageIndex = 0; // snake.webp (default background)
+    }
+
+    // Update the background image
+    body.style.background = `url('${backgroundImages[imageIndex]}')`;
+    body.style.backgroundRepeat = "no-repeat";
+    body.style.backgroundPosition = "center center";
+    body.style.backgroundSize = "cover";
+    console.log(`Background image updated to: ${backgroundImages[imageIndex]}`);
+    console.log(currentBackground);
+}
+
 // Stylings for snake / buttons
 //Random spawns
 //Enemies
@@ -461,5 +512,4 @@ soundEnabled = !soundEnabled;
 //Different difficulty modes
 // Leaderboard
 // Customizable controls
-// Customizable snake color
 // Button configuration for tablets

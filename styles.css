@@ -18,6 +18,7 @@ body {
     justify-content: center;
     font-family: 'Courier New', Courier, monospace;
     height: 100%;
+    transition: background-image 0.5s ease-in-out;
 }
 
 canvas {
