@@ -75,6 +75,12 @@ function resetSettings() {
 
 }
 
+// Go home / refresh
+
+function goHome() {
+    window.location.reload();
+}
+
 // Snake color handling:
 
 const snakeColorPicker = document.getElementById('snakeColorPicker');
