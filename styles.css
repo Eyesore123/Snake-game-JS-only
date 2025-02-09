@@ -174,7 +174,7 @@ p {
 
     .controlcontainer {
         position: absolute;
-        bottom: 19%;
+        bottom: 15%;
         flex-direction: column;
         width: 200px;
         height: 230px !important;
@@ -208,7 +208,9 @@ p {
 
     button#restartBtn {
         padding: 10px;
+        margin-bottom: 200px;
         z-index: 2;
+        
     }
 
 
