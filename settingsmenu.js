@@ -71,6 +71,7 @@ function resetSettings() {
     localStorage.removeItem('snakeColor');
     backdrop.classList.add('hidden');
     settingMenu.style.display = 'none';
+    moveInterval = setInterval(moveSnake, 200);
 
 }
 
