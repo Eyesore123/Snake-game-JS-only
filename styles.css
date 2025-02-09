@@ -120,10 +120,10 @@ p {
 
 @media screen and (max-width: 600px) {
    .footer {
-        top: -3%;
+        top: 0%;
     }
     #restartBtn {
-    margin-bottom: 60px;
+    margin-bottom: 90px;
     }
 }
 
@@ -213,7 +213,7 @@ p {
 
 
     #gameCanvas {
-        margin-top: 0vh;
+        margin-top: 5vh;
         scale: 0.75;
     }
 
