@@ -179,7 +179,7 @@ p {
         width: 200px;
         height: 230px !important;
         transform: rotate(90deg);
-        gap: 100px;
+        gap: 140px;
     }
 
     #startBtn {
@@ -209,8 +209,11 @@ p {
     button#restartBtn {
         padding: 10px;
         margin-bottom: 200px;
-        z-index: 2;
-        
+        z-index: 2;   
+    }
+
+    p#score.score {
+        margin-bottom: 50px;
     }
 
 
