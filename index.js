@@ -136,6 +136,11 @@ function initGame() {
 
     // Reset game state
     gameStarted = true;
+
+    if (localStorage.getItem('eatSoundVolume') !== null) {
+    eatSound.volume = parseFloat(localStorage.getItem('eatSoundVolume'));
+    }
+    
     paused = false;
     over = false;
     snake = [{ x: 5, y: 5 }, { x: 4, y: 5 }, { x: 3, y: 5 }];

@@ -14,17 +14,21 @@ function toggleSettingsMenu() {
             if (settingMenu.style.display !== 'none') {
                 backdrop.classList.add('hidden');
                 settingMenu.style.display = 'none';
+                if(!gameOverFlag) {
                 moveInterval = setInterval(moveSnake, 200);
                 }
             }
-        });
+        }
+    });
 }
 
 function applySettings() {
     const settingMenu = document.getElementById('settingsmenu');
     backdrop.classList.add('hidden');
     settingMenu.style.display = 'none';
-    moveInterval = setInterval(moveSnake, 200);
+    if(!gameOverFlag) {
+        moveInterval = setInterval(moveSnake, 200);
+    }
 }
 
 // Volume handling:
@@ -71,7 +75,9 @@ function resetSettings() {
     localStorage.removeItem('snakeColor');
     backdrop.classList.add('hidden');
     settingMenu.style.display = 'none';
+    if (!gameOverFlag) {
     moveInterval = setInterval(moveSnake, 200);
+    }
 
 }
 
