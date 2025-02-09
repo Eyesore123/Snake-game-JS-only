@@ -49,6 +49,13 @@ div {
     align-items: center;
 }
 
+p {
+    font-size: 24px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
 .cog {
     z-index: 3;
     width: 40px;
@@ -195,13 +202,6 @@ div {
         transform: rotate(90deg);
     }
 
-    p {
-        font-size: 15px;
-        text-align: center;
-        padding: 0;
-        margin: 0;
-    }
-
     #score {
         margin-bottom: 140px;
     }
@@ -291,7 +291,7 @@ div {
 
     #gameCanvas {
        scale: 1.2;
-       margin-top: 15vh;
+       margin-top: 5vh;
     }
 
     button#startBtn {
@@ -301,6 +301,15 @@ div {
 
     p#score.score {
         margin-top: 5vh;
+        padding: 50px;
+    }
+
+    p#footertext {
+        margin-top: 50px;
+    }
+
+    .cogcontainer {
+        margin-bottom: 2vh;
     }
 }
 

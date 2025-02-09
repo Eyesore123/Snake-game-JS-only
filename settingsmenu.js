@@ -22,3 +22,20 @@ function applySettings() {
     backdrop.classList.add('hidden');
     settingMenu.style.display = 'none';
 }
+
+// Function to update the volume of the soundtrack
+
+const soundtrackVolumeSlider = document.getElementById('soundtrackVolume');
+const eatSoundVolumeSlider = document.getElementById('eatSoundVolume');
+
+soundtrackVolumeSlider.addEventListener('input', () => {
+    const volume = soundtrackVolumeSlider.value;
+    soundtrack.volume = volume;
+    localStorage.setItem('soundtrackVolume', volume);
+});
+
+eatSoundVolumeSlider.addEventListener('input', () => {
+    const volume = eatSoundVolumeSlider.value;
+    eatSound.volume = volume;
+    localStorage.setItem('eatSoundVolume', volume);
+});

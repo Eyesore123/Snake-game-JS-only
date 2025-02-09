@@ -5,13 +5,27 @@ const startBtn = document.getElementById('startBtn');
 const restartBtn = document.getElementById('restartBtn');
 const cogcontainer = document.getElementById('cogcontainer');
 let soundEnabled = true;
+
 const soundtrack = new Audio('/Assets/soundtrack.mp3');
 soundtrack.loop = true;
 soundtrack.currentTime = 9.5;
-soundtrack.volume = 0.15;
+
+// eatSound.volume = 0.2;
+// soundtrack.volume = 0.15;
 
 const eatSound = new Audio('/Assets/eat.mp3');
-eatSound.volume = 0.2;
+if (localStorage.getItem('eatSoundVolume')) {
+    eatSound.volume = parseFloat(localStorage.getItem('eatSoundVolume'));
+} else {
+    eatSound.volume = 0.2;
+}
+
+if (localStorage.getItem('soundtrackVolume')) {
+    soundtrack.volume = parseFloat(localStorage.getItem('soundtrackVolume'));
+} else {
+    soundtrack.volume = 0.15;
+}
+
 const gameOverSound = new Audio('/Assets/lose.mp3');
 gameOverSound.volume = 0.6;
 
