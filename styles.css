@@ -127,7 +127,7 @@ p {
     }
 }
 
-@media screen and (max-width: 1446px) {
+@media screen and (min-width: 1109px) and (max-width: 1446px) {
 
     #gameCanvas {
        scale: 0.8;
@@ -149,7 +149,7 @@ p {
     }
 
     #gameCanvas {
-        margin-top: 7vh;
+        margin-top: -10vh;
     }
 
     #gameOver {
@@ -383,14 +383,18 @@ div#left.left {
     }
 
     #gameCanvas {
-        margin-bottom: 260px;
+        margin-bottom: 120px;
     }
 
     div#controlcontainer.controlcontainer {
-        height: 100px !important;
+        height: 10px !important;
         margin-bottom: 100px;
         bottom:29%;
         
+    }
+
+    #restartBtn {
+        margin-bottom: 100px;
     }
 
     div#right.right {
@@ -403,5 +407,9 @@ div#left.left {
         margin-bottom: -80px;
         margin-top: 30px;
         margin-left: 50px;
+    }
+
+    .cogcontainer {
+        margin-bottom: 0px;
     }
 }

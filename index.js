@@ -168,7 +168,12 @@ function drawGame() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     // Dynamic rendering of the snake where the color is determined by the index of the segment in the snake array
     for (let i = 0; i < snake.length; i++) {
-        ctx.fillStyle = `hsl(${60 * i}, 70%, 60%)`;
+        // If no color selected (no local storage value), use a default color
+        if(!localStorage.getItem('snakeColor')) {
+            ctx.fillStyle = `hsl(${60 * i}, 70%, 60%)`;
+        } else {
+            ctx.fillStyle = localStorage.getItem('snakeColor');
+        }
         // Green color snake: ctx.fillStyle = `green`; 
         ctx.fillRect(snake[i].x * gridSize, snake[i].y * gridSize, gridSize - 2, gridSize - 2);
     }

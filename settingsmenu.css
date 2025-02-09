@@ -30,3 +30,24 @@
     max-width: 60%;
     color: black;
 }
+
+label {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+input[type="color" i] {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#snakeColorPicker {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+    #settingswindow label {
+        font-size: 14px;
+    }
+}

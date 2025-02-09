@@ -8,6 +8,13 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="landingpagefooter.css">
 <link rel="stylesheet" href="settingsmenu.css">
+
+<!-- Experimental: -->
+
+<!-- <link rel="stylesheet" href="./node_modules/@simonwep/pickr/dist/themes/classic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script> -->
+
+
 </head>
 <body id="body">
 
@@ -21,8 +28,20 @@
                 <label for="eatSoundVolume">Effects volume:</label>
                 <input type="range" id="eatSoundVolume" name="eatSoundVolume" min="0" max="1" step="0.01" value="0.2">
 
+
+                <label for="snakeColorPicker">Choose snake color:</label>
+                <input type="color" id="snakeColorPicker" name="snakeColorPicker">
+
+                <!-- Experimental: -->
+                <!-- <div class="color-picker"></div> -->
+
+
                 <button onclick="applySettings()">
                     Apply settings
+                </button>
+
+                <button onclick="resetSettings()">
+                    Reset settings
                 </button>
             </p>
         </div>
@@ -129,5 +148,6 @@
     <script src="index.js"></script>
     <script src="settingsmenu.js"></script>
     <script src="gamepadsupport.js"></script>
+    <script type="module" src="pickr.js"></script>
 </body>
 </html>
