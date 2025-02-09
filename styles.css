@@ -316,7 +316,7 @@ button:hover {
     cursor: pointer;
 }
 
-p {
+.footerdiv p {
     color: white;
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
     font-size: 30px;
