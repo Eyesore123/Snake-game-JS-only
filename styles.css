@@ -8,15 +8,14 @@ html, body {
 body {
     margin: 0;
     padding: 0;
-
     position: relative;
     top:0;
     left:0;
-
     background-size: cover;
     background-repeat: no-repeat;
     background-color: yellowgreen;
     background-image: url('/Assets/snake.webp');
+    background-position: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,6 +23,7 @@ body {
     font-family: 'Courier New', Courier, monospace;
     height: 100%;
     transition: background-image 0.5s ease-in-out;
+    will-change: background-image;
     -moz-transition: background-image 0.5s ease-in-out;
     -webkit-transition: background-image 0.5s ease-in-out;
 }

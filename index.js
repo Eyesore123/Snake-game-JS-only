@@ -125,6 +125,7 @@ document.getElementById('gameCanvas').addEventListener('click', handleClick);
 function initGame() {
     // audio.play();
     soundtrack.play();
+    audioContext.resume();
     // Dynamic buttons:
     restartBtn.style.display = 'block';
     startBtn.style.display = 'none';
@@ -385,6 +386,13 @@ document.addEventListener('keydown', handleKeyPress);
 
 startBtn.addEventListener('click', initGame);
 
+// Experimental:
+
+startBtn.addEventListener('touchstart', function() {
+    soundtrack.play();
+    audioContext.resume();
+})
+
 let currentBackground = 1;
 
 function changeBackground() {
@@ -412,19 +420,11 @@ function changeBackground() {
     } else if (currentBackground === 7) {
     body.style.backgroundImage = "url('./Assets/snake_8.webp')";
     currentBackground = 8;
-    // } else if (currentBackground === 8) {
-    // body.style.backgroundImage = "url('./Assets/snake_9.webp')";
-    // currentBackground = 9;
-    // } else if (currentBackground === 9) {
-    // body.style.backgroundImage = "url('./Assets/snake_10.webp')";
-    // currentBackground = 10;
     } else {
     body.style.backgroundImage = "url('./Assets/snake.webp')";
     currentBackground = 1;
     }
 }
-
-// Changing backgrounds
 
 function changeBackgroundInGame(score) {
     clearInterval(backgroundInterval);
@@ -435,24 +435,28 @@ function changeBackgroundInGame(score) {
     console.log(`Score: ${score}`);
 
     // Determine the image index based on the score ranges
-    if (score >= 600) {
-        // imageIndex = 6;
+    if (score >= 800) {
+        imageIndex = 8;
+        clearInterval(moveInterval);
+        moveInterval = setInterval(moveSnake, 100);
+    } else if (score >= 700) {
+        imageIndex = 7;
         clearInterval(moveInterval);
         moveInterval = setInterval(moveSnake, 105);
     } else if (score >= 500) {
-        imageIndex = 5; // snake_6.webp
+        imageIndex = 5;
         clearInterval(moveInterval);
         moveInterval = setInterval(moveSnake, 110);
     } else if (score >= 400) {
-        imageIndex = 4; // snake_5.webp
+        imageIndex = 4;
         clearInterval(moveInterval);
         moveInterval = setInterval(moveSnake, 120);
     } else if (score >= 300) {
-        imageIndex = 3; // snake_4.webp
+        imageIndex = 3;
         clearInterval(moveInterval);
         moveInterval = setInterval(moveSnake, 140);
     } else if (score >= 200) {
-        imageIndex = 2; // snake_3.webp
+        imageIndex = 2;
         clearInterval(moveInterval);
         moveInterval = setInterval(moveSnake, 160);
     } else if (score >= 100) {
@@ -574,3 +578,22 @@ applyButton.addEventListener('click', () => {
 // }, 1000);
 
 // update();
+
+// Structure for game loop:
+
+// function gameLoop() {
+//     drawGame();
+//     moveSnake();
+//     // Other game logic here
+//     requestAnimationFrame(gameLoop);
+//   }
+  
+//   function initGame() {
+//     // Initialization code here
+//     gameLoop();
+//   }
+  
+//   function flashGame() {
+//     // Flash game code here
+//     gameLoop();
+//   }

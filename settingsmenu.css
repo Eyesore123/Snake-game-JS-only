@@ -32,14 +32,6 @@
     z-index: 5;
 }
 
-/* @media screen and (max-width: 600px) {
-    #settingswindow {
-        scale: 0.9;
-        height: 450px;
-    }
-    
-} */
-
 #settingswindow p {
     max-width: 60%;
     color: black;
