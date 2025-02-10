@@ -35,9 +35,10 @@ const backgroundImages = [
     './Assets/snake_3.webp',
     './Assets/snake_4.webp',
     './Assets/snake_5.webp',
-    './Assets/snake_6.webp',
-    './Assets/snake_7.webp',
-    './Assets/snake_8.webp'
+    './Assets/snake_6.webp'
+    // ,
+    // './Assets/snake_7.webp',
+    // './Assets/snake_8.webp'
 ];
 
 function preloadImages() {
@@ -505,6 +506,8 @@ function changeBackgroundInGame(score) {
 // Leaderboard
 // Customizable controls
 // Button configuration for tablets
+
+//Tremble toggle:
 
 const audio = document.getElementById('soundtrack');
 const volumeSlider = document.getElementById('soundtrackVolume');
