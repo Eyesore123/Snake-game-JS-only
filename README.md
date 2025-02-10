@@ -52,5 +52,6 @@ On Youtube:
 
 ## What I learned during this project
 
-* When there's movement involved (a game or something similar), always declare global movement variable(s) for keeping track of changes in movement speed.
-* Effects can be hard to get right for unknown browser-related reasons, and total control over things means you probably have to do it yourself from the beginning.
+* When there's movement involved (a game or something similar), always declare global movement variables for keeping track of changes in movement speed and direction.
+* Effects and small details can be hard to get right (for example, default selectors and sliders from browser, audio API controls etc.) for unknown browser-related reasons. If you want near total control over things, that means you probably have to do it yourself from the beginning.
+* This project made me think how much JavaScript is tied to browsers and their behavior. I wonder how different it would be to build games with lower-level languages.
