@@ -32,7 +32,7 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 
 ## Known issues
 
-* Pausing doesn't work correctly. I need to create a global moveSpeed variable for move speed permanence. Also gameLoop function would be good for controlling fps and logic flow.
+* GameLoop function would be good for controlling fps and logic flow, because currently unexpected things can happen when settings are changed during a game.
 * Ease-in-out effect of the background image doesn't work on Mozilla, so images change abruptly. I tried to replace body with a div for the location of background images. I also tried pseudoelements, but nothing worked.
 * Game can lead to game over suddenly in rare instances when some unknown combination of keys is pressed and the game over condition gets triggered prematurely.
 
@@ -49,3 +49,8 @@ Soundtrack is h6itam - FUNK OSCURO SUPERSLOWED
 On Youtube:
 
 <a href="https://www.youtube.com/watch?v=xmRVFNv_DGs">Music</a>
+
+## What I learned during this project
+
+* When there's movement involved (a game or something similar), always declare global movement variable(s) for keeping track of changes in movement speed.
+* Effects can be hard to get right for unknown browser-related reasons, and total control over things means you probably have to do it yourself from the beginning.

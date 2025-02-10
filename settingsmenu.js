@@ -26,7 +26,7 @@ function applySettings() {
     const settingMenu = document.getElementById('settingsmenu');
     backdrop.classList.add('hidden');
     settingMenu.style.display = 'none';
-    if(!gameOverFlag) {
+    if(!gameOverFlag && !paused) {
         togglePause();
     }
 }
@@ -66,6 +66,8 @@ eatSoundVolumeSlider.addEventListener('input', () => {
 
 function resetSettings() {
     const settingMenu = document.getElementById('settingsmenu');
+    const trembleToggle = document.getElementById('trembleToggle');
+    trembleToggle.checked = false;
     soundtrackVolumeSlider.value = 0.15;
     eatSoundVolumeSlider.value = 0.2;
     soundtrack.volume = 0.15;
@@ -75,7 +77,7 @@ function resetSettings() {
     localStorage.removeItem('snakeColor');
     backdrop.classList.add('hidden');
     settingMenu.style.display = 'none';
-    if (!gameOverFlag) {
+    if (!gameOverFlag && !paused) {
     togglePause();
     }
 }
