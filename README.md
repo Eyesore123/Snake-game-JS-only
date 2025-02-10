@@ -23,7 +23,6 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 * Enemies
 * Settings menu: food amount, snake speed, grid size, snake length etc.
 * Better tablet compatibility
-* Different difficulty modes / game gets faster
 * Leaderboard
 * Customizable controls
 * Viewport fixes and better scaling for higher resolution screens

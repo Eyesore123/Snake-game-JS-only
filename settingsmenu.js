@@ -78,7 +78,6 @@ function resetSettings() {
     if (!gameOverFlag) {
     moveInterval = setInterval(moveSnake, 200);
     }
-
 }
 
 // Go home / refresh
@@ -87,12 +86,9 @@ function goHome() {
     window.location.reload();
 }
 
-// Snake color handling:
-
+// Snake color
 const snakeColorPicker = document.getElementById('snakeColorPicker');
-
 let snakeColor = localStorage.getItem('snakeColor') || snakeColorPicker.value;
-
 snakeColorPicker.addEventListener('input', () => {
     snakeColor = snakeColorPicker.value;
     localStorage.setItem('snakeColor', snakeColor);

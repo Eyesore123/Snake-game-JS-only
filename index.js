@@ -35,7 +35,9 @@ const backgroundImages = [
     './Assets/snake_3.webp',
     './Assets/snake_4.webp',
     './Assets/snake_5.webp',
-    './Assets/snake_6.webp'
+    './Assets/snake_6.webp',
+    './Assets/snake_7.webp',
+    './Assets/snake_8.webp'
 ];
 
 function preloadImages() {
@@ -54,8 +56,6 @@ function initStyles() {
     document.getElementById('title').style.display = 'none';
     document.getElementById('footertext').style.display = 'flex';
     document.getElementById('footer').style.display = 'flex';
-
-    // Experimental:
     document.getElementById('cogcontainer').style.setProperty('bottom', '10px', 'important');
 
     const controls = document.getElementById('controlcontainer');
@@ -124,6 +124,7 @@ function handleClick() {
 document.getElementById('gameCanvas').addEventListener('click', handleClick);
 
 function initGame() {
+    // audio.play();
     soundtrack.play();
     // Dynamic buttons:
     restartBtn.style.display = 'block';
@@ -224,6 +225,7 @@ function placeFood() {
 function restartGame() {
     clearInterval(flashInterval);
     clearInterval(moveInterval); // Clear the previous interval
+    footer.style.display = 'flex';
     snake = [];
     score = 0;
     over = false;
@@ -301,28 +303,6 @@ function isOppositeDirection(newDirection) {
 // Move the snake and apply direction changes from the queue
 function moveSnake() {
     if (!gameStarted || paused) return;
-
-    // if (score === 10) {
-    //     paused = true;
-        
-    //     const warning = document.createElement('div');
-    //     warning.textContent = "Speed increasing!";
-    //     warning.style.position = 'absolute';
-    //     warning.style.fontSize = '2em';
-    //     warning.style.color = 'red';
-    //     warning.style.top = '50%';
-    //     warning.style.left = '50%';
-    //     warning.style.transform = 'translate(-50%, -50%)';
-    //     document.body.appendChild(warning);
-
-    //     setTimeout(() => {
-    //         paused = false;
-    //         document.body.removeChild(warning);
-    //         clearInterval(moveInterval);
-    //         moveInterval = setInterval(moveSnake, 100); // Much faster!
-    //     }, 1000); // Shorter pause
-    // }
-
     // Apply the next direction in the queue if available
     if (directionQueue.length > 0) {
         const nextDirection = directionQueue.shift();
@@ -428,6 +408,18 @@ function changeBackground() {
     } else if (currentBackground === 5) {
     body.style.backgroundImage = "url('./Assets/snake_6.webp')";
     currentBackground = 6;
+    // } else if (currentBackground === 6) {
+    // body.style.backgroundImage = "url('./Assets/snake_7.webp')";
+    // currentBackground = 7;
+    // } else if (currentBackground === 7) {
+    // body.style.backgroundImage = "url('./Assets/snake_8.webp')";
+    // currentBackground = 8;
+    // } else if (currentBackground === 8) {
+    // body.style.backgroundImage = "url('./Assets/snake_9.webp')";
+    // currentBackground = 9;
+    // } else if (currentBackground === 9) {
+    // body.style.backgroundImage = "url('./Assets/snake_10.webp')";
+    // currentBackground = 10;
     } else {
     body.style.backgroundImage = "url('./Assets/snake.webp')";
     currentBackground = 1;
@@ -438,10 +430,7 @@ function handleSoundToggle() {
 
     const soundButton1 = document.getElementById('soundicon1');
     const soundButton2 = document.getElementById('soundicon2');
-
-    // Toggle the sound button icon
     
-
     if (soundEnabled) {
         soundtrack.pause();
         eatSound.volume = 0;
@@ -462,8 +451,7 @@ soundEnabled = !soundEnabled;
 // Changing backgrounds
 
 function changeBackgroundInGame(score) {
-    // Remove bg image:
-    clearInterval(backgroundInterval); // Clear the interval if there is one
+    clearInterval(backgroundInterval);
     console.log('changeBackground called');
     const body = document.body;
     let imageIndex;
@@ -471,10 +459,14 @@ function changeBackgroundInGame(score) {
     console.log(`Score: ${score}`);
 
     // Determine the image index based on the score ranges
-    if (score >= 500) {
+    if (score >= 600) {
+        // imageIndex = 6;
+        clearInterval(moveInterval);
+        moveInterval = setInterval(moveSnake, 105);
+    } else if (score >= 500) {
         imageIndex = 5; // snake_6.webp
         clearInterval(moveInterval);
-        moveInterval = setInterval(moveSnake, 100);
+        moveInterval = setInterval(moveSnake, 110);
     } else if (score >= 400) {
         imageIndex = 4; // snake_5.webp
         clearInterval(moveInterval);
@@ -513,3 +505,47 @@ function changeBackgroundInGame(score) {
 // Leaderboard
 // Customizable controls
 // Button configuration for tablets
+
+const audio = document.getElementById('soundtrack');
+const volumeSlider = document.getElementById('soundtrackVolume');
+const trembleToggle = document.getElementById('trembleToggle');
+
+const audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Cross-browser support
+const analyser = audioContext.createAnalyser();
+const source = audioContext.createMediaElementSource(soundtrack);
+source.connect(analyser);
+analyser.connect(audioContext.destination);
+
+analyser.fftSize = 256;
+const bufferLength = analyser.frequencyBinCount;
+const dataArray = new Uint8Array(bufferLength);
+
+volumeSlider.addEventListener('input', () => {
+    audio.volume = volumeSlider.value;
+});
+
+const applyButton = document.getElementById('applyBtn');
+
+function analyzeAudio() {
+    analyser.getByteFrequencyData(dataArray);
+    const bass = dataArray.slice(0, 10).reduce((a, b) => a + b, 0) / 10;
+
+    if (trembleToggle.checked && bass > 210) {
+        document.body.classList.add('tremble');
+    } else {
+        document.body.classList.remove('tremble');
+    }
+
+    requestAnimationFrame(analyzeAudio);
+}
+
+applyButton.addEventListener('click', () => {
+    if (trembleToggle.checked) {
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+        analyzeAudio();
+    } else {
+        document.body.classList.remove('tremble');
+    }
+});

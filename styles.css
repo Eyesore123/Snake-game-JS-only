@@ -86,12 +86,12 @@ p {
     display: none;
 }
 
-#settingsbutton {
+.settingsbutton {
     padding: 2px;
     margin: 0;
 }
 
-#settingsbutton:hover {
+.settingsbutton:hover {
     cursor: pointer;
 }
 
@@ -418,4 +418,38 @@ div#left.left {
     .cogcontainer {
         margin-bottom: 0px;
     }
+}
+
+#soundtrack {
+    margin: 30px;
+}
+
+.tremble {
+    animation: tremble-animation 0.1s ease-in-out infinite;
+}
+
+@keyframes tremble-animation {
+    0% { transform: translate(0px, 0px); }
+    25% { transform: translate(1px, -1px); }
+    50% { transform: translate(0px, 1px); }
+    75% { transform: translate(-1px, 0px); }
+    100% { transform: translate(0px, 0px); }
+}
+
+#bodycontainer {
+    margin: 0;
+    padding: 0;
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: yellowgreen;
+    background-image: url('/Assets/snake.webp');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    height: 100%;
+    transition: background-image 0.5s ease-in-out;
 }
