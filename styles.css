@@ -436,7 +436,7 @@ div#left.left {
     100% { transform: translate(0px, 0px); }
 }
 
-#bodycontainer {
+/* #bodycontainer {
     margin: 0;
     padding: 0;
     background-size: 70%;
@@ -452,4 +452,4 @@ div#left.left {
     width: 100%;
     height: 100%;
     transition: background-image 0.5s ease-in-out;
-}
+} */

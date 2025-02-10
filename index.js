@@ -69,7 +69,6 @@ function initStyles() {
     }
 }
 
-
 let gameStarted = false;
 
 let snake = [];
@@ -351,7 +350,6 @@ function moveSnake() {
 
     snake.unshift(head);
 
-    // Check if snake eats the food
     if (head.x === food.x && head.y === food.y) {
         eatSound.play();
         score += 10;
@@ -427,28 +425,6 @@ function changeBackground() {
     }
 }
 
-function handleSoundToggle() {
-
-    const soundButton1 = document.getElementById('soundicon1');
-    const soundButton2 = document.getElementById('soundicon2');
-    
-    if (soundEnabled) {
-        soundtrack.pause();
-        eatSound.volume = 0;
-        gameOverSound.volume = 0;
-        soundButton1.style.display = 'none';
-        soundButton2.style.display = 'block';
-    } else {
-        soundtrack.play();
-        eatSound.volume = 0.2;
-        gameOverSound.volume = 0.6;
-        soundButton2.style.display = 'none';
-        soundButton1.style.display = 'block';
-
-    }
-soundEnabled = !soundEnabled;
-}
-
 // Changing backgrounds
 
 function changeBackgroundInGame(score) {
@@ -497,15 +473,27 @@ function changeBackgroundInGame(score) {
     console.log(currentBackground);
 }
 
-// Stylings for snake / buttons
-//Random spawns
-//Enemies
-// Settings menu: food amount, snake speed, grid size, snake length etc.
-//Go back button in setting menu
-//Different difficulty modes
-// Leaderboard
-// Customizable controls
-// Button configuration for tablets
+function handleSoundToggle() {
+
+    const soundButton1 = document.getElementById('soundicon1');
+    const soundButton2 = document.getElementById('soundicon2');
+    
+    if (soundEnabled) {
+        soundtrack.pause();
+        eatSound.volume = 0;
+        gameOverSound.volume = 0;
+        soundButton1.style.display = 'none';
+        soundButton2.style.display = 'block';
+    } else {
+        soundtrack.play();
+        eatSound.volume = 0.2;
+        gameOverSound.volume = 0.6;
+        soundButton2.style.display = 'none';
+        soundButton1.style.display = 'block';
+
+    }
+soundEnabled = !soundEnabled;
+}
 
 //Tremble toggle:
 
@@ -533,7 +521,7 @@ function analyzeAudio() {
     analyser.getByteFrequencyData(dataArray);
     const bass = dataArray.slice(0, 10).reduce((a, b) => a + b, 0) / 10;
 
-    if (trembleToggle.checked && bass > 210) {
+    if (trembleToggle.checked && bass > 200) {
         document.body.classList.add('tremble');
     } else {
         document.body.classList.remove('tremble');
@@ -552,3 +540,38 @@ applyButton.addEventListener('click', () => {
         document.body.classList.remove('tremble');
     }
 });
+
+// Framerate counter for testing purposes:
+
+// let lastTime = 0;
+// const maxFPS = 60;
+// let fps = 0;
+// let fpsCounter = 0;
+// let lastFPSUpdate = 0;
+
+// function update(time) {
+//   const delta = time - lastTime;
+//   if (delta < 1000 / maxFPS) return;
+//   lastTime = time;
+//   fpsCounter++;
+//   if (time - lastFPSUpdate >= 1000) {
+//     fps = fpsCounter;
+//     fpsCounter = 0;
+//     lastFPSUpdate = time;
+//   }
+//   // Update game state here
+//   document.getElementById('fps').innerText = `FPS: ${fps}`;
+//   requestAnimationFrame(update);
+// }
+
+// // Get the FPS from the canvas
+// function getFPS() {
+//   return fps;
+// }
+
+// // Update the FPS display
+// setInterval(() => {
+//   document.getElementById('fps').innerText = `FPS: ${getFPS()}`;
+// }, 1000);
+
+// update();
