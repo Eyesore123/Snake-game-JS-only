@@ -32,6 +32,7 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 
 ## Known issues
 
+* Pausing doesn't work correctly. I need to create a global moveSpeed variable for move speed permanence. Also gameLoop function would be good for controlling fps and logic flow.
 * Ease-in-out effect of the background image doesn't work on Mozilla, so images change abruptly. I tried to replace body with a div for the location of background images. I also tried pseudoelements, but nothing worked.
 * Game can lead to game over suddenly in rare instances when some unknown combination of keys is pressed and the game over condition gets triggered prematurely.
 

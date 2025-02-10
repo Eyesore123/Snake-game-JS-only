@@ -15,7 +15,7 @@ function toggleSettingsMenu() {
                 backdrop.classList.add('hidden');
                 settingMenu.style.display = 'none';
                 if(!gameOverFlag) {
-                moveInterval = setInterval(moveSnake, 200);
+                togglePause();
                 }
             }
         }
@@ -27,7 +27,7 @@ function applySettings() {
     backdrop.classList.add('hidden');
     settingMenu.style.display = 'none';
     if(!gameOverFlag) {
-        moveInterval = setInterval(moveSnake, 200);
+        togglePause();
     }
 }
 
@@ -76,7 +76,7 @@ function resetSettings() {
     backdrop.classList.add('hidden');
     settingMenu.style.display = 'none';
     if (!gameOverFlag) {
-    moveInterval = setInterval(moveSnake, 200);
+    togglePause();
     }
 }
 

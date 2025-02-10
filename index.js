@@ -86,8 +86,35 @@ let over = false;
 let paused = false;
 
 // Movement happens in intervals. When the game ends, the interval is cleared.
+let moveSpeed = 200;
 let moveInterval;
+function updateSpeed() {
+    if (score >= 700) {
+        moveSpeed = 100;
+    } else if (score >= 600) {
+        moveSpeed = 105;
+    } else if (score >= 500) {
+        moveSpeed = 110;
+    } else if (score >= 400) {
+        moveSpeed = 120;
+    } else if (score >= 300) {
+        moveSpeed = 140;
+    } else if (score >= 200) {
+        moveSpeed = 160;
+    } else if (score >= 100) {
+        moveSpeed = 180;
+    } else {
+        moveSpeed = 200;
+    }
+}
 
+function updateGameSpeed() {
+    updateSpeed();
+
+    clearInterval(moveInterval);
+    moveInterval = setInterval(moveSnake, moveSpeed);
+    console.log(moveSpeed);
+}
 
 // Debounce function to prevent rapid clicks / not a good approach for game mechanics
 
@@ -105,13 +132,15 @@ let moveInterval;
 // Change the background every 10 seconds
 let backgroundInterval = setInterval(changeBackground, 10000);
 function togglePause() {
-    paused = !paused;
     if (paused) {
-        clearInterval(moveInterval);
+        console.log("Paused");
+        moveInterval = setInterval(moveSnake, moveSpeed);  // Restart the movement interval
     } else {
-        moveInterval = setInterval(moveSnake, 200);
+        clearInterval(moveInterval);  // Pause the game
     }
+    paused = !paused;
 }
+
 
 function handleClick() {
     console.log("clicked");
@@ -134,7 +163,8 @@ function initGame() {
     // Reset bg change interval
 
     clearInterval(backgroundInterval);
-
+    moveInterval = setInterval(moveSnake, moveSpeed);
+    
     // Reset game state
     gameStarted = true;
 
@@ -149,10 +179,6 @@ function initGame() {
     dy = 0;
     score = 0;
     scoreElement.textContent = `Score: ${score}`;
-
-    // Move the snake every 200 milliseconds (5 moves per second)
-    clearInterval(moveInterval);
-    moveInterval = setInterval(moveSnake, 200);
 
     placeFood();
     if (gameOverFlag) {
@@ -303,6 +329,7 @@ function isOppositeDirection(newDirection) {
 // Move the snake and apply direction changes from the queue
 function moveSnake() {
     if (!gameStarted || paused) return;
+    updateGameSpeed();
     // Apply the next direction in the queue if available
     if (directionQueue.length > 0) {
         const nextDirection = directionQueue.shift();
@@ -342,6 +369,7 @@ function moveSnake() {
                 gameOverFlag = true;
                 console.log("Game Over flag set to true");
                 flashCanvas();
+                clearInterval(moveInterval);
             }
             clearInterval(moveInterval);
             return;
@@ -356,6 +384,7 @@ function moveSnake() {
         if (score === 100 || score === 200 || score === 300 || score === 400 || score === 500) {
             changeBackgroundInGame(score);
         }
+        updateGameSpeed();
         scoreElement.textContent = `Score: ${score}`;
         placeFood();
 
@@ -386,7 +415,7 @@ document.addEventListener('keydown', handleKeyPress);
 
 startBtn.addEventListener('click', initGame);
 
-// Experimental:
+// Starts music on mobile screen touch
 
 startBtn.addEventListener('touchstart', function() {
     soundtrack.play();
@@ -438,31 +467,24 @@ function changeBackgroundInGame(score) {
     if (score >= 800) {
         imageIndex = 8;
         clearInterval(moveInterval);
-        moveInterval = setInterval(moveSnake, 100);
     } else if (score >= 700) {
         imageIndex = 7;
         clearInterval(moveInterval);
-        moveInterval = setInterval(moveSnake, 105);
     } else if (score >= 500) {
         imageIndex = 5;
         clearInterval(moveInterval);
-        moveInterval = setInterval(moveSnake, 110);
     } else if (score >= 400) {
         imageIndex = 4;
         clearInterval(moveInterval);
-        moveInterval = setInterval(moveSnake, 120);
     } else if (score >= 300) {
         imageIndex = 3;
         clearInterval(moveInterval);
-        moveInterval = setInterval(moveSnake, 140);
     } else if (score >= 200) {
         imageIndex = 2;
         clearInterval(moveInterval);
-        moveInterval = setInterval(moveSnake, 160);
     } else if (score >= 100) {
         imageIndex = 1; // snake_2.webp
-        clearInterval(moveInterval);
-        moveInterval = setInterval(moveSnake, 180);
+        clearInterval(moveInterval);;
     } else {
         imageIndex = 0; // snake.webp (default background)
     }
