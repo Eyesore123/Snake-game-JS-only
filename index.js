@@ -35,10 +35,9 @@ const backgroundImages = [
     './Assets/snake_3.webp',
     './Assets/snake_4.webp',
     './Assets/snake_5.webp',
-    './Assets/snake_6.webp'
-    // ,
-    // './Assets/snake_7.webp',
-    // './Assets/snake_8.webp'
+    './Assets/snake_6.webp',
+    './Assets/snake_7.webp',
+    './Assets/snake_8.webp'
 ];
 
 function preloadImages() {
@@ -407,12 +406,12 @@ function changeBackground() {
     } else if (currentBackground === 5) {
     body.style.backgroundImage = "url('./Assets/snake_6.webp')";
     currentBackground = 6;
-    // } else if (currentBackground === 6) {
-    // body.style.backgroundImage = "url('./Assets/snake_7.webp')";
-    // currentBackground = 7;
-    // } else if (currentBackground === 7) {
-    // body.style.backgroundImage = "url('./Assets/snake_8.webp')";
-    // currentBackground = 8;
+    } else if (currentBackground === 6) {
+    body.style.backgroundImage = "url('./Assets/snake_7.webp')";
+    currentBackground = 7;
+    } else if (currentBackground === 7) {
+    body.style.backgroundImage = "url('./Assets/snake_8.webp')";
+    currentBackground = 8;
     // } else if (currentBackground === 8) {
     // body.style.backgroundImage = "url('./Assets/snake_9.webp')";
     // currentBackground = 9;
