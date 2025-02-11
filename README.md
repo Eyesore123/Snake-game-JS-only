@@ -27,7 +27,6 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 * Leaderboard
 * Customizable controls
 * A higher framerate by reorganizing game logic
-* Viewport fixes and better scaling for higher resolution screens
 * Improved background effects that are applied to bg image
 
 ## Known issues
@@ -58,3 +57,4 @@ On Youtube:
 * When there's movement involved (a game or something similar), always declare global movement variables for keeping track of changes in movement speed and direction.
 * Effects and small details can be hard to get right (for example, default selectors and sliders from browser, audio API controls etc.) for unknown browser-related reasons. If you want near total control over things, that means you probably have to do it yourself from the beginning.
 * This project made me think how much JavaScript is tied to browsers and their behaviour. I wonder how different it would be to build games with lower-level languages.
+* It would be nice to think about scaling during the building process so you don't have struggle with scaling for higher resolutions

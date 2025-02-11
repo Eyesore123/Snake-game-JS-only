@@ -5,6 +5,12 @@ html, body {
     overflow: hidden;
 }
 
+p#score.score {
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 1%;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -167,6 +173,10 @@ p {
     div#right.right {
         margin-right: 15px;
     }
+
+    #startBtn {
+        margin-top: 10vh;
+    }
 }
 
 @media screen and (min-width: 1446px) {
@@ -243,37 +253,44 @@ p {
 
         div#controlcontainer.controlcontainer {
             width: 150px;
-            height: 180px !important;
+            height: 200px !important;
             gap: 80px;
             margin-top: 100px;
-            margin-bottom: -100px;
+            margin-bottom: -80px;
             scale: 1.25;
         }
 
         button#restartBtn {
             position: fixed;
-            bottom: 180px;
+            bottom: -40px;
             z-index: 4;
         }
 
         #gameCanvas {
             scale: 0.8;
-        }
-
-        button, p, div.footerdiv {
-            z-index: 3;
+            margin-top: -5vh;
         }
 
         * {
-            scale: 0.9;
+            scale: 0.87;
         }
 
         .cogcontainer {
-            margin-bottom: -10px;
+            margin-bottom: -15px;
         }
 
         .footer {
             top: -4%;
+        }
+
+        #landingpagefooter {
+            height: 180px !important;
+        }
+
+        #settingsmenu {
+            height: 100vh !important;
+            width: 100vw !important;
+            z-index: 5;
         }
     }
 
