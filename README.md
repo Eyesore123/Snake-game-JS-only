@@ -42,6 +42,9 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 
 ![snake_game](https://github.com/user-attachments/assets/3d1b71c4-b47f-4c88-9c7c-94a64268d78b)
 
+<img src="https://github.com/user-attachments/assets/d267a0a2-9d89-4afe-ba47-ed560b90d92c" width="400" />
+
+
 Game sounds are from Zapsplat.
 
 Soundtrack is h6itam - FUNK OSCURO SUPERSLOWED
