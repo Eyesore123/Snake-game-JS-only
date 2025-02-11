@@ -19,7 +19,6 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 ## Planned improvements
 
 * Better stylings for snake / buttons
-* WASD-keys for controls
 * Random spawns for snake
 * Enemies
 * Settings menu: snake speed, grid size etc.
