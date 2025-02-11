@@ -16,16 +16,17 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 - **Gamepad Support:** Use a gamepad for an even more immersive experience.
 - **Customizable Snake Color:** Choose the color of your liking!
 
-## Planned improvements
+## Planned improvements in the order of importance
 
+* Customizable controls / new settings page for additional settings
 * Better stylings for snake / buttons
-* Random spawns for snake
-* Enemies
-* Settings menu: snake speed, grid size etc.
-* Better tablet compatibility
-* Leaderboard
-* Customizable controls
 * A higher framerate by reorganizing game logic
+* Settings for snake speed, grid size etc.
+* Vibrations for gamepad
+* Leaderboard
+* Random spawns for snake
+* Enemies/obstacles
+* Better tablet compatibility
 
 ## Known issues
 

@@ -264,7 +264,7 @@ function restartGame() {
 // Variables to store movement directions
 let directionQueue = [];
 
-// Modified key press handler to enqueue direction
+// Modified key press handler to handle queue direction
 function handleKeyPress(e) {
     const direction = getDirectionFromKey(e.key);
     

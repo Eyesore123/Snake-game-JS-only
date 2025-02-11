@@ -132,6 +132,22 @@ p {
     }
 }
 
+/* Game canvas sizes larger for larger screens: */
+
+@media screen and (min-width: 3001px) {
+    #gameCanvas {
+        scale: 1.8 !important;
+        margin-top: -10vh !important;
+        margin-bottom: 10vh !important;
+    }
+}
+
+@media screen and (min-width: 1445px) and (max-width: 3000px) {
+    #gameCanvas {
+        margin-bottom: 10vh !important;
+    }
+}
+
 @media screen and (max-width: 600px) {
    .footer {
         top: 0%;
@@ -141,7 +157,7 @@ p {
     }
 }
 
-@media screen and (min-width: 1109px) and (max-width: 1446px) {
+@media screen and (min-width: 1109px) and (max-height: 1445px) {
 
     #gameCanvas {
        scale: 0.8;
@@ -170,12 +186,16 @@ p {
         padding-bottom: 20px;
     }
 
+    #cogcontainer {
+        margin-bottom: 50px;
+    }
+
     div#right.right {
         margin-right: 15px;
     }
 
     #startBtn {
-        margin-top: 10vh;
+        z-index: 2;
     }
 }
 
@@ -287,7 +307,7 @@ p {
             height: 180px !important;
         }
 
-        #settingsmenu {
+        .settingsmenu {
             height: 100vh !important;
             width: 100vw !important;
             z-index: 5;
@@ -320,7 +340,6 @@ p {
 @media screen and (min-width: 1446px) {
 
     #gameCanvas {
-       scale: 1.2;
        margin-top: 5vh;
     }
 
@@ -330,16 +349,13 @@ p {
     }
 
     p#score.score {
-        margin-top: 5vh;
-        padding: 50px;
+        margin-top: -10vh;
+        margin-bottom: 4vh;
+        padding: 10px;
     }
 
     p#footertext {
         margin-top: 50px;
-    }
-
-    .cogcontainer {
-        margin-bottom: 2vh;
     }
 }
 
@@ -507,3 +523,24 @@ body::after {
     z-index: -1;
     background-image: var(--dynamic-image);
   } */
+
+  .flippage {
+    position: fixed;
+    margin: auto;
+    align-content: center;
+    top: 50%;
+    right: -4%;
+    border: none;
+    cursor: pointer;
+    background-color: whitesmoke;
+    width: 10%;
+    height: 15%;
+    transform: translate(-50%, -50%);
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
+  .flippage svg {
+    min-width: 19px;
+  }

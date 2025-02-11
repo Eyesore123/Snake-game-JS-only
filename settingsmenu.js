@@ -95,3 +95,11 @@ snakeColorPicker.addEventListener('input', () => {
     snakeColor = snakeColorPicker.value;
     localStorage.setItem('snakeColor', snakeColor);
 });
+
+// Settings menu flip
+function flipPage() {
+    const settingsMenu1 = document.getElementById('settingsmenu');
+    const settingsMenu2 = document.getElementById('settingsmenu2');
+    settingsMenu1.style.display = (settingsMenu1.style.display === 'none') ? 'block' : 'none';
+    settingsMenu2.style.display = (settingsMenu2.style.display === 'none') ? 'block' : 'none';
+}
