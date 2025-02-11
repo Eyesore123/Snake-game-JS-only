@@ -326,6 +326,24 @@ function isOppositeDirection(newDirection) {
            (newDirection.dy === -dy && newDirection.dx === 0);
 }
 
+document.addEventListener('keydown', (event) => {
+    switch (event.key) {
+        case 'w':
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+            break;
+        case 's':
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+            break;
+        case 'a':
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
+            break;
+        case 'd':
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+            break;
+    }
+            
+});
+
 // Move the snake and apply direction changes from the queue
 function moveSnake() {
     if (!gameStarted || paused) return;
