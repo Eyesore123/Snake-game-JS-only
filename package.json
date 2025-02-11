@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@simonwep/pickr": "^1.9.1",
-    "pickr": "^0.1.4"
-  }
-}

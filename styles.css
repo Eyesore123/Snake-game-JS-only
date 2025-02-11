@@ -460,3 +460,33 @@ div#left.left {
     height: 100%;
     transition: background-image 0.5s ease-in-out;
 } */
+
+/* Dynamic bg images, experimental: */
+
+/* body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/Assets/snake.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1;
+  }
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1;
+    background-image: var(--dynamic-image);
+  } */
