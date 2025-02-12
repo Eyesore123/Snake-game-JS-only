@@ -482,7 +482,7 @@ div#left.left {
     #startBtn {
         z-index: 2;
         position: fixed;
-        bottom: 50%;
+        bottom: 40%;
     }
 
     #gameCanvas {
