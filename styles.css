@@ -483,6 +483,10 @@ div#left.left {
 /* tablet styles: */
 
 @media screen and (min-width: 708px) and (max-width: 1600px) and (max-height: 800px) {
+
+    h1 {
+        margin: 0 !important;
+    }
     #startBtn {
         z-index: 2;
         position: fixed;
