@@ -494,7 +494,7 @@ div#left.left {
     #startBtn {
         z-index: 2;
         position: fixed;
-        bottom: 40%;
+        bottom: 50%;
     }
 
     #gameCanvas {
@@ -513,7 +513,7 @@ div#left.left {
     }
 
     #cogcontainer {
-        margin-bottom: 1vh;
+        margin-bottom: 3vh;
     }
 
     #left button, #right button {
