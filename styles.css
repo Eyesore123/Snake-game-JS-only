@@ -520,6 +520,10 @@ div#left.left {
         scale: 1.4;
         margin: 30px;
     }
+
+    #backdrop {
+        background-color: transparent !important;
+      }
 }
 
 /* #bodycontainer {
