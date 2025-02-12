@@ -98,17 +98,17 @@ let moveSpeed = 200;
 let moveInterval;
 function updateSpeed() {
     if (score >= 700) {
-        moveSpeed = 100;
-    } else if (score >= 600) {
-        moveSpeed = 105;
-    } else if (score >= 500) {
         moveSpeed = 110;
-    } else if (score >= 400) {
+    } else if (score >= 600) {
         moveSpeed = 120;
-    } else if (score >= 300) {
+    } else if (score >= 500) {
+        moveSpeed = 130;
+    } else if (score >= 400) {
         moveSpeed = 140;
+    } else if (score >= 300) {
+        moveSpeed = 150;
     } else if (score >= 200) {
-        moveSpeed = 160;
+        moveSpeed = 165;
     } else if (score >= 100) {
         moveSpeed = 180;
     } else {
