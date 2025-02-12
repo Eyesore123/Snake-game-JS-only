@@ -501,7 +501,7 @@ div#left.left {
     }
 
     #cogcontainer {
-        margin-bottom: -100px;
+        margin-bottom: 0px;
     }
 
     #left button, #right button {
