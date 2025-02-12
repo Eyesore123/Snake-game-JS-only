@@ -223,7 +223,7 @@ p {
     #startBtn {
         z-index: 2;
         position: fixed;
-        margin-bottom: 0vh;
+        margin-bottom: 3vh;
     }
 
     .left, .right {
@@ -439,8 +439,8 @@ div#left.left {
         
     }
 
-    #restartBtn {
-        margin-bottom: 100px;
+    #startBtn {
+        margin-bottom: 50px !important;
     }
 
     div#right.right {
@@ -456,8 +456,12 @@ div#left.left {
     }
 
     .cogcontainer {
-        margin-bottom: 0px;
+        margin-bottom: 20px;
     }
+
+    #backdrop {
+        background-color: transparent;
+      }
 }
 
 #soundtrack {
@@ -501,7 +505,7 @@ div#left.left {
     }
 
     #cogcontainer {
-        margin-bottom: 0px;
+        margin-bottom: -10px;
     }
 
     #left button, #right button {
