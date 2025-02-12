@@ -29,8 +29,8 @@
                 <input type="range" id="soundtrackVolume" name="soundtrackVolume" min="0" max="1" step="0.01" value="0.15">
 
                 <!-- Tremble Effect Toggle -->
-                <label for="trembleToggle">Enable Tremble</label>
-                <input type="checkbox" id="trembleToggle" name="trembleToggle">
+                <label for="trembletoggle">Tremble effect</label>
+                <input type="checkbox" id="trembleToggle" name="trembletoggle">
 
                 <label for="eatSoundVolume">Effects volume:</label>
                 <input type="range" id="eatSoundVolume" name="eatSoundVolume" min="0" max="1" step="0.01" value="0.2">
@@ -58,7 +58,12 @@
     </div>
     <div class="settingsmenu" id="settingsmenu2" style="display: none;">
         <div class="backdrop" id="backdrop">
-            <p class="settingswindow" id="settingswindow">
+            <p class="settingswindow" id="settingswindow2">
+            <label for="controllertremble">Enable gamepad vibration</label>
+            <input type="checkbox" id="trembletoggle2" name="trembletoggle" />
+                <label for="tremblestrength">Vibration strength:</label>
+                <input type="range" id="tremblestrength" name="tremblestrength" min="0" max="1" step="0.01" value="30">
+
                 <button class="flippage" onClick="flipPage()">
                     <svg data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>

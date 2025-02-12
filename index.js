@@ -398,6 +398,11 @@ function moveSnake() {
 
     if (head.x === food.x && head.y === food.y) {
         eatSound.play();
+
+        if (activeGamepad) {
+        triggerTremble(activeGamepad, 0.2, 0.6, 50);
+        }
+
         score += 10;
         if (score === 100 || score === 200 || score === 300 || score === 400 || score === 500) {
             changeBackgroundInGame(score);

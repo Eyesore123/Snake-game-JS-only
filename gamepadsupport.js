@@ -3,6 +3,51 @@ let controllerActive = false;
 // This helps to keep track of the start button state:
 let startButtonWasPressed = false;
 
+const trembleToggle2 = document.getElementById('trembletoggle2');
+
+// Variables for the vibration
+let trembleEnabled = false;
+if (localStorage.getItem('trembleEnabled') === 'true') {
+    trembleEnabled = true;
+    trembleToggle2.checked = true;
+} else {
+    trembleEnabled = false;
+    trembleToggle2.checked = false;
+}
+
+let trembleStrength;
+
+// global gamepad variable
+
+let activeGamepad = null;
+
+trembleToggle2.addEventListener('change', (event) => {
+    trembleEnabled = event.target.checked;
+    localStorage.setItem('trembleEnabled', trembleEnabled);
+});
+
+// Tremble strength slider isn't working yet
+
+const trembleStrengthSlider = document.getElementById('tremblestrength');
+
+trembleStrengthSlider.addEventListener('input', (event) => {
+    trembleStrength = event.target.value / 100;
+    localStorage.setItem('trembleStrength', trembleStrength);
+});
+
+function triggerTremble(gamepad, weakMagnitude = 0.3, strongMagnitude = 0.8, duration = 100) {
+    if (trembleEnabled && gamepad.vibrationActuator) {
+        // Tweak the values in function calls instead of here!
+
+        gamepad.vibrationActuator.playEffect('dual-rumble', {
+            startDelay: 0,
+            duration: duration,
+            weakMagnitude: weakMagnitude,
+            strongMagnitude: strongMagnitude
+        });
+    }
+}
+
 // Polling for gamepad inputs
 function updateGamepad() {
     const gamepads = navigator.getGamepads();
@@ -25,18 +70,17 @@ function updateGamepad() {
             }
 
             if (dPadUp) {
-                enqueueDirection({ dx: 0, dy: -1 });
+                enqueueDirection({ dx: 0, dy: -1 })
             } else if (dPadDown) {
-                enqueueDirection({ dx: 0, dy: 1 });
+                enqueueDirection({ dx: 0, dy: 1 })
             } else if (dPadLeft) {
-                enqueueDirection({ dx: -1, dy: 0 });
+                enqueueDirection({ dx: -1, dy: 0 })
             } else if (dPadRight) {
-                enqueueDirection({ dx: 1, dy: 0 });
+                enqueueDirection({ dx: 1, dy: 0 })
             }
            
             const leftStickX = gamepad.axes[0]; 
             const leftStickY = gamepad.axes[1];
-
             
             const deadZone = 0.2;
             if (Math.abs(leftStickX) > deadZone || Math.abs(leftStickY) > deadZone) {
@@ -44,7 +88,7 @@ function updateGamepad() {
                     if (leftStickX > 0) {
                         enqueueDirection({ dx: 1, dy: 0 });
                     } else {
-                        enqueueDirection({ dx: -1, dy: 0 }); 
+                        enqueueDirection({ dx: -1, dy: 0 });
                     }
                 } else {
                     if (leftStickY > 0) {
@@ -73,12 +117,14 @@ window.addEventListener("gamepadconnected", (e) => {
     console.log("Gamepad connected:", e.gamepad);
     gamepadIndex = e.gamepad.index;
     controllerActive = true;
+    activeGamepad = e.gamepad;
 });
 
 window.addEventListener("gamepaddisconnected", (e) => {
     console.log("Gamepad disconnected:", e.gamepad);
     gamepadIndex = null;
     controllerActive = false;
+    activeGamepad = null;
 });
 
 function gameLoop() {
