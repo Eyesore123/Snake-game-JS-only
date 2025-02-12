@@ -205,7 +205,7 @@ p {
     }
 }
 
-@media screen and (max-width: 1108px) {
+@media screen and (max-height: 1000px) and (max-width: 1600px) {
     .controls {
         display: block;
     }
@@ -496,6 +496,8 @@ div#left.left {
 
     #controlcontainer {
         gap: 500px;
+        position: fixed;
+        scale: 0.8;
     }
 
     #cogcontainer {

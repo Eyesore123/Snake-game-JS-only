@@ -61,11 +61,19 @@ function initStyles() {
     const controls = document.getElementById('controlcontainer');
     controls.style.display = 'flex';
 
-    if (window.innerWidth < 469) {
-        controls.style.display = 'flex';
-    } else {
-        controls.style.display = 'none';
-    }
+    // Remove, redundant code:
+
+    // if (window.innerWidth < 469) {
+    //     controls.style.display = 'flex';
+    // } else {
+    //     controls.style.display = 'none';
+    // }
+
+    // if (gameStarted) {
+    //     controls.style.display = 'flex';
+    // } else {
+    //     controls.style.display = 'none';
+    // }
 }
 
 let gameStarted = false;
