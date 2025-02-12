@@ -489,7 +489,7 @@ div#left.left {
     }
 
     #footerdiv {
-        margin-bottom: 20px;
+        margin-bottom: 50px;
     }
     #startBtn {
         z-index: 2;
@@ -513,7 +513,7 @@ div#left.left {
     }
 
     #cogcontainer {
-        margin-bottom: 3vh;
+        margin-bottom: 5vh;
     }
 
     #left button, #right button {
