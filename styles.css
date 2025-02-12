@@ -478,10 +478,11 @@ div#left.left {
 
 /* tablet styles: */
 
-@media screen and (min-width: 1008px) and (max-height: 1366px) {
+@media screen and (min-width: 708px) and (max-width: 1200px) and (max-height: 800px) {
     #startBtn {
-        margin-top: -10vh;
         z-index: 2;
+        position: fixed;
+        bottom: 50%;
     }
 
     #gameCanvas {
@@ -498,7 +499,7 @@ div#left.left {
     }
 
     #cogcontainer {
-        margin-bottom: -10px;
+        margin-bottom: -100px;
     }
 
     #left button, #right button {
