@@ -25,7 +25,6 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 * Soundtrack swap during game
 * Leaderboard
 * Enemies/obstacles
-* Better tablet compatibility
 
 ## Known issues
 
@@ -51,9 +50,13 @@ On Youtube:
 
 <a href="https://www.youtube.com/watch?v=xmRVFNv_DGs">Music</a>
 
+## How this was built
+
+* At first I had only canvas. Then I added a snake. Then I tried to get it move. After that I added food and collisions and the list goes on. If you want to do something similar, then start with the canvas, snake and general game mechanics. Declare global variables for movement and set up functions to organize the game logic. Then add the rest of the game elements and tinker as you go.
+
 ## What I learned during this project
 
 * When there's movement involved (a game or something similar), always declare global movement variables for keeping track of changes in movement speed and direction.
 * Effects and small details can be hard to get right (for example, default selectors and sliders from browser, audio API controls etc.) for unknown browser-related reasons. If you want near total control over things, that means you probably have to do it yourself from the beginning.
-* This project made me think how much JavaScript is tied to browsers and their behaviour. I wonder how different it would be to build games with lower-level languages.
-* It would be nice to think about scaling during the building process so you don't have struggle with scaling for higher resolutions
+* This project made me think how much JavaScript is tied to browsers. At the same time it is a good and a bad thing. It's good because it's so easy to use many common APIs. It's bad because everything in-game is tied to how browsers work. I wonder how different it would be to build games in lower-level languages, and this project made me want to try other languages. This project also made me realize that good JavaScript is similar to other languages in structure. If you can write the same program in some other language, then I think you can write it better with JavaScript, too.    
+* It would be nice to think about scaling during the building process so you don't have struggle with scaling for higher resolutions.
