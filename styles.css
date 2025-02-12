@@ -476,6 +476,37 @@ div#left.left {
     100% { transform: translate(0px, 0px); }
 }
 
+/* tablet styles: */
+
+@media screen and (min-width: 1008px) and (max-height: 1366px) {
+    #startBtn {
+        margin-top: -10vh;
+        z-index: 2;
+    }
+
+    #gameCanvas {
+        margin-top: 5vh !important;
+        scale: 0.8 !important;
+    }
+
+    p#footertext {
+        margin-top: -20px;
+    }
+
+    #controlcontainer {
+        gap: 500px;
+    }
+
+    #cogcontainer {
+        margin-bottom: -10px;
+    }
+
+    #left button, #right button {
+        scale: 1.4;
+        margin: 30px;
+    }
+}
+
 /* #bodycontainer {
     margin: 0;
     padding: 0;
