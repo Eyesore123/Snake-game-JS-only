@@ -6,12 +6,9 @@ const restartBtn = document.getElementById('restartBtn');
 const cogcontainer = document.getElementById('cogcontainer');
 let soundEnabled = true;
 
-const soundtrack = new Audio('/Assets/soundtrack.mp3');
+let soundtrack = new Audio('/Assets/soundtrack.mp3');
 soundtrack.loop = true;
 soundtrack.currentTime = 9.5;
-
-// eatSound.volume = 0.2;
-// soundtrack.volume = 0.15;
 
 const eatSound = new Audio('/Assets/eat.mp3');
 if (localStorage.getItem('eatSoundVolume')) {
@@ -121,7 +118,7 @@ function updateGameSpeed() {
 
     clearInterval(moveInterval);
     moveInterval = setInterval(moveSnake, moveSpeed);
-    console.log(moveSpeed);
+    //console.log(moveSpeed);
 }
 
 // Debounce function to prevent rapid clicks / not a good approach for game mechanics
@@ -149,7 +146,6 @@ function togglePause() {
     paused = !paused;
 }
 
-
 function handleClick() {
     console.log("clicked");
     togglePause();
@@ -160,9 +156,7 @@ function handleClick() {
 document.getElementById('gameCanvas').addEventListener('click', handleClick);
 
 function initGame() {
-    // audio.play();
-    soundtrack.play();
-    audioContext.resume();
+
     // Dynamic buttons:
     restartBtn.style.display = 'block';
     startBtn.style.display = 'none';
@@ -259,6 +253,22 @@ function placeFood() {
 function restartGame() {
     clearInterval(flashInterval);
     clearInterval(moveInterval); // Clear the previous interval
+
+    // Reset soundtrack to original state
+    soundtrack.pause();
+    soundtrack = new Audio('/Assets/soundtrack.mp3');
+    soundtrack.loop = true;
+    soundtrack.currentTime = 9.5;
+    soundtrack.volume = volumeSlider.value;
+    
+    // Reset audio connections
+    source = audioContext.createMediaElementSource(soundtrack);
+    source.connect(analyser);
+    soundtrack.play();
+    soundtrack2playing = false;
+    audioContext.resume();
+    analyzeAudio();
+
     footer.style.display = 'flex';
     snake = [];
     score = 0;
@@ -386,7 +396,7 @@ function moveSnake() {
     const footer = document.getElementById('footer');
 
     for (let segment of snake) {
-        if (head.x === segment.x && head.y === segment.y) {
+        if (head.x === segment.x && head.y === segment.y && snake.length > 3) {
             over = true;
             if (over === true) {
                 footer.style.display = 'none';
@@ -410,17 +420,53 @@ function moveSnake() {
     if (head.x === food.x && head.y === food.y) {
         eatSound.play();
 
-        if (activeGamepad) {
-        triggerTremble(activeGamepad, 0.2, 0.8, 50);
-        }
+    if (score >= 290 && !soundtrack2playing) {
+        console.log("Switching to soundtrack 2");
+        soundtrack.pause();
+        soundtrack2.play().then(() => {
+            soundtrack2.volume = volumeSlider.value;
+            soundtrack2playing = true;
+            console.log("Soundtrack 2 is playing.");
+            source.disconnect(analyser);
+            source2.connect(analyser);
+            source = source2;
+            soundtrack = soundtrack2;
+            analyzeAudio();
+        }).catch(error => {
+            console.error("Error playing soundtrack 2:", error);
+        });
+    }
+    
+    if (score < 20 && soundtrack2playing) {
+        console.log("Switching back to soundtrack 1");
+        soundtrack2.pause().then(() => {
+            soundtrack.play().then(() => {
+                soundtrack.volume = volumeSlider.value;
+                soundtrack2playing = false;
+                console.log("Soundtrack 1 is playing.");
+                source2.disconnect(analyser);
+                source.connect(analyser);
+                analyzeAudio();
+            }).catch(error => {
+                console.error("Error playing soundtrack 1:", error);
+            });
+        }).catch(error => {
+            console.error("Error pausing soundtrack 2:", error);
+        });
+    }
 
-        score += 10;
-        if (score === 100 || score === 200 || score === 300 || score === 400 || score === 500) {
-            changeBackgroundInGame(score);
-        }
-        updateGameSpeed();
-        scoreElement.textContent = `Score: ${score}`;
-        placeFood();
+    if (activeGamepad) {
+    triggerTremble(activeGamepad, 0.2, 0.8, 50);
+    }
+
+    score += 10;
+    console.log("Score:", score);
+    if (score === 100 || score === 200 || score === 300 || score === 400 || score === 500) {
+        changeBackgroundInGame(score);
+    }
+    updateGameSpeed();
+    scoreElement.textContent = `Score: ${score}`;
+    placeFood();
 
     } else {
         snake.pop();
@@ -518,7 +564,7 @@ function changeBackgroundInGame(score) {
         clearInterval(moveInterval);
     } else if (score >= 100) {
         imageIndex = 1; // snake_2.webp
-        clearInterval(moveInterval);;
+        clearInterval(moveInterval);
     } else {
         imageIndex = 0; // snake.webp (default background)
     }
@@ -562,10 +608,13 @@ const trembleToggle = document.getElementById('trembleToggle');
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Cross-browser support
 const analyser = audioContext.createAnalyser();
-const source = audioContext.createMediaElementSource(soundtrack);
+let soundtrack2playing = false;
+let soundtrack2 = new Audio('/Assets/soundtrack2.mp3');
+soundtrack2.loop = true;
+let source = audioContext.createMediaElementSource(soundtrack);
+let source2 = audioContext.createMediaElementSource(soundtrack2);
 source.connect(analyser);
 analyser.connect(audioContext.destination);
-
 analyser.fftSize = 256;
 const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
@@ -576,18 +625,23 @@ volumeSlider.addEventListener('input', () => {
 
 const applyButton = document.getElementById('applyBtn');
 
-function analyzeAudio() {
-    analyser.getByteFrequencyData(dataArray);
-    const bass = dataArray.slice(0, 10).reduce((a, b) => a + b, 0) / 10;
-
-    if (trembleToggle.checked && bass > 200) {
-        document.body.classList.add('tremble');
-    } else {
-        document.body.classList.remove('tremble');
+    function analyzeAudio() {
+        if (analyser && analyser.getByteFrequencyData) {
+            analyser.getByteFrequencyData(dataArray);
+    
+            const bass = dataArray.slice(0, 10).reduce((a, b) => a + b, 0) / 10;
+    
+            if (trembleToggle.checked && bass > 200) {
+                document.body.classList.add('tremble');
+            } else {
+                document.body.classList.remove('tremble');
+            }
+        } else {
+            console.error('analyser is not valid');
+        }
+    
+        requestAnimationFrame(analyzeAudio);
     }
-
-    requestAnimationFrame(analyzeAudio);
-}
 
 applyButton.addEventListener('click', () => {
     if (trembleToggle.checked) {
@@ -599,6 +653,11 @@ applyButton.addEventListener('click', () => {
         document.body.classList.remove('tremble');
     }
 });
+
+analyzeAudio();
+
+// eatSound.volume = 0.2;
+// soundtrack.volume = 0.15;
 
 // Framerate counter for testing purposes:
 

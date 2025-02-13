@@ -10,7 +10,7 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 - **Smooth Gameplay:** Smooth gameplay that feels responsive and intuitive.
 - **Score Tracking:** Keep track of your score as you progress through the game.
 - **Game Over Screen:** See your final score.
-- **Music and Sound Effects:** Amazing soundtrack, game sounds and customizable sound volume!
+- **Music and Sound Effects:** Amazing soundtracks, game sounds and customizable sound volume!
 - **Changing Backgrounds:** Nice snake themed backgrounds that change as you progress through the game.
 - **Mobile Compatibility:** Play the game on your mobile device (tablets and very small phone devices might not display correctly)
 - **Gamepad Support:** Use a gamepad for an even more immersive experience.
@@ -21,17 +21,15 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 * Customizable controls
 * Better stylings for snake / buttons
 * A higher framerate by reorganizing game logic
-* Settings for snake speed, grid size etc.
-* Soundtrack swap during game
+* Setting for grid size.
 * Leaderboard
 * Enemies/obstacles
 
 ## Known issues
 
-* GameLoop function would be a good addition for controlling fps and logic flow, because currently unexpected things can happen when settings are changed during a game.
 * Ease-in-out effect of the background image doesn't work on Mozilla because view transitions API is not supported. There might be a workaround but that would require using pseudoelements and getting rid of the ease-in-out effect.
-* Game can lead to game over suddenly in rare instances when some unknown combination of keys is pressed and the game over condition gets triggered prematurely.
-
+* Game can lead to game over suddenly in rare instances when some unknown combination of keys is pressed and the game over condition gets triggered prematurely. It could be tied to the fact that moveSpeed and moveInterval variables are updated many times in a single frame, and what you see is not what you press. Directionqueue array is used to prevent gameovers that get triggered in wrong places (it helps fast turns), but it doesn't do miracles. Erratic behaviour increases with higher speeds. I tried adding a cooldown between keypresses, but it didn't seem to help.
+* GameLoop function would be a good addition for controlling fps and logic flow, because currently unexpected things can happen when settings are changed during a game.
 
 ![snake_game2](https://github.com/user-attachments/assets/67f92ca1-3c2f-4061-a68d-472d3be7adbc)
 
@@ -43,11 +41,16 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 
 Game sounds are from Zapsplat.
 
-Soundtrack is h6itam - FUNK OSCURO SUPERSLOWED
+Soundtracks:
+
+h6itam - FUNK OSCURO SUPERSLOWED
+Vampire Survivors Soundtrack - Copper Green Intent (looping)
 
 On Youtube:
 
-<a href="https://www.youtube.com/watch?v=xmRVFNv_DGs">Music</a>
+<a href="https://www.youtube.com/watch?v=xmRVFNv_DGs">Soundtrack 1</a>
+
+<a href="https://www.youtube.com/watch?v=p7qpWDSN7lM">Soundtrack 2</a>
 
 ## How this was built
 
