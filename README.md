@@ -29,7 +29,6 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 ## Known issues
 
 * GameLoop function would be a good addition for controlling fps and logic flow, because currently unexpected things can happen when settings are changed during a game.
-* Gamepad vibration slider doesn't work yet.
 * Ease-in-out effect of the background image doesn't work on Mozilla because view transitions API is not supported. There might be a workaround but that would require using pseudoelements and getting rid of the ease-in-out effect.
 * Game can lead to game over suddenly in rare instances when some unknown combination of keys is pressed and the game over condition gets triggered prematurely.
 

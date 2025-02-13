@@ -15,7 +15,13 @@ if (localStorage.getItem('trembleEnabled') === 'true') {
     trembleToggle2.checked = false;
 }
 
-let trembleStrength;
+let trembleStrength = localStorage.getItem('trembleStrength') || 0.5;
+
+if (trembleStrength === null) {
+    trembleStrength = 0.5;
+} else {
+    trembleStrength = parseFloat(trembleStrength);
+}
 
 // global gamepad variable
 
@@ -31,13 +37,18 @@ trembleToggle2.addEventListener('change', (event) => {
 const trembleStrengthSlider = document.getElementById('tremblestrength');
 
 trembleStrengthSlider.addEventListener('input', (event) => {
-    trembleStrength = event.target.value / 100;
+    trembleStrength = event.target.value;
     localStorage.setItem('trembleStrength', trembleStrength);
 });
 
 function triggerTremble(gamepad, weakMagnitude = 0.3, strongMagnitude = 0.8, duration = 100) {
     if (trembleEnabled && gamepad.vibrationActuator) {
         // Tweak the values in function calls instead of here!
+
+        const vibrationBoost = 1.5;
+
+        weakMagnitude = weakMagnitude * trembleStrength * 0,5 * vibrationBoost;
+        strongMagnitude = strongMagnitude * trembleStrength * 0.8 * vibrationBoost;
 
         gamepad.vibrationActuator.playEffect('dual-rumble', {
             startDelay: 0,

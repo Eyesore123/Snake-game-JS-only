@@ -396,6 +396,9 @@ function moveSnake() {
                 console.log("Game Over flag set to true");
                 flashCanvas();
                 clearInterval(moveInterval);
+                if (activeGamepad) {
+                    triggerTremble(activeGamepad, 0.2, 0.8, 500);
+                    }
             }
             clearInterval(moveInterval);
             return;
@@ -408,7 +411,7 @@ function moveSnake() {
         eatSound.play();
 
         if (activeGamepad) {
-        triggerTremble(activeGamepad, 0.2, 0.6, 50);
+        triggerTremble(activeGamepad, 0.2, 0.8, 50);
         }
 
         score += 10;
