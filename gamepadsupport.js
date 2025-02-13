@@ -32,8 +32,6 @@ trembleToggle2.addEventListener('change', (event) => {
     localStorage.setItem('trembleEnabled', trembleEnabled);
 });
 
-// Tremble strength slider isn't working yet
-
 const trembleStrengthSlider = document.getElementById('tremblestrength');
 
 trembleStrengthSlider.addEventListener('input', (event) => {
@@ -44,6 +42,7 @@ trembleStrengthSlider.addEventListener('input', (event) => {
 function triggerTremble(gamepad, weakMagnitude = 0.3, strongMagnitude = 0.8, duration = 100) {
     if (trembleEnabled && gamepad.vibrationActuator) {
         // Tweak the values in function calls instead of here!
+        // Vibration boost multiplier to boost the vibration strength
 
         const vibrationBoost = 1.5;
 
@@ -112,7 +111,7 @@ function updateGamepad() {
         }
     }
 }
-
+// Direction queue for gamepad
 function enqueueDirection(direction) {
     if (!isOppositeDirection(direction)) {
         if (directionQueue.length < 2) {

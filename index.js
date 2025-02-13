@@ -251,6 +251,7 @@ function placeFood() {
 }
 
 function restartGame() {
+    soundtrack2.currentTime = 0;
     clearInterval(flashInterval);
     clearInterval(moveInterval); // Clear the previous interval
     directionQueue = [];

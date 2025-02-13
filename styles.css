@@ -464,6 +464,12 @@ div#left.left {
       }
 }
 
+@media screen and (max-height: 1000px) and (min-width: 600px) and (max-width: 1600px) {
+    .controlcontainer {
+        gap: 250px !important;
+    }
+}
+
 #soundtrack {
     margin: 30px;
 }
