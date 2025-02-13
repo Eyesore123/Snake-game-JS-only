@@ -253,7 +253,7 @@ function placeFood() {
 function restartGame() {
     clearInterval(flashInterval);
     clearInterval(moveInterval); // Clear the previous interval
-
+    directionQueue = [];
     // Reset soundtrack to original state
     soundtrack.pause();
     soundtrack = new Audio('/Assets/soundtrack.mp3');
@@ -403,6 +403,7 @@ function moveSnake() {
                 gameOverSound.play();
                 document.getElementById('gameOver').style.display = 'flex';
                 gameOverFlag = true;
+                directionQueue = [];
                 console.log("Game Over flag set to true");
                 flashCanvas();
                 clearInterval(moveInterval);
