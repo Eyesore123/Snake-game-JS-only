@@ -6,16 +6,16 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 
 - **Classic Arcade Gameplay:** Experience the nostalgia of the original Snake game.
 - **Stunning Graphics:** Enjoy the mesmerizing graphics that bring the game to life.
-- **Easy Controls:** Use the arrow keys to control the snake's movement.
+- **Easy Controls:** Use the arrow or wasd keys to control the snake's movement.
 - **Smooth Gameplay:** Smooth gameplay that feels responsive and intuitive.
 - **Score Tracking:** Keep track of your score as you progress through the game.
 - **Game Over Screen:** See your final score.
 - **Music and Sound Effects:** Amazing soundtracks, game sounds and customizable sound volume!
 - **Changing Backgrounds:** Nice snake themed backgrounds that change as you progress through the game.
 - **Mobile Compatibility:** Play the game on your mobile device (tablets and very small phone devices might not display correctly)
-- **Gamepad Support:** Use a gamepad for an even more immersive experience. You can choose the level of vibration and use reversed
-controls.
+- **Gamepad Support:** Use a gamepad for an even more immersive experience. You can choose the level of vibration and / or use reversed controls.
 - **Customizable Snake Color:** Choose the color of your liking!
+- **Animated facial expressions:** Snake wiggles its tongue and opens its mouth when it eats.
 
 ## Planned improvements in the order of importance
 
