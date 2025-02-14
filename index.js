@@ -262,6 +262,57 @@ function drawGame() {
             ctx.arc(snake[i].x * gridSize + gridSize / 2 + 3, snake[i].y * gridSize + gridSize / 2, 1.5, 0, 2 * Math.PI);
             ctx.fill();
         }
+
+        if (i === 0 && !document.getElementById('removeEyes').checked) {
+            // Distance to food
+            const distX = Math.abs(snake[0].x - food.x);
+            const distY = Math.abs(snake[0].y - food.y);
+            const isNearFood = distX <= 1 && distY <= 1;
+            
+            let tongueAngle = 0;
+            if (dx === 1) tongueAngle = 0;
+            if (dx === -1) tongueAngle = Math.PI;
+            if (dy === -1) tongueAngle = -Math.PI/2;
+            if (dy === 1) tongueAngle = Math.PI/2;
+            
+            //Draw tongue
+            ctx.save();
+            ctx.translate(snake[i].x * gridSize + gridSize/2, snake[i].y * gridSize + gridSize/2);
+            ctx.rotate(tongueAngle);
+            
+            ctx.beginPath();
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 2;
+            ctx.moveTo(gridSize/2, 0);
+            
+            //Wiggle
+            const wiggle = Math.sin(Date.now() / 100) * 2;
+            if (isNearFood) {
+                // Extended tongue
+                ctx.lineTo(gridSize * 0.8, wiggle);
+                ctx.moveTo(gridSize * 0.8, wiggle);
+                ctx.lineTo(gridSize, wiggle - 3);
+                ctx.moveTo(gridSize * 0.8, wiggle);
+                ctx.lineTo(gridSize, wiggle + 3);
+            } else {
+                // Normal
+                ctx.lineTo(gridSize * 0.6, wiggle);
+                ctx.moveTo(gridSize * 0.6, wiggle);
+                ctx.lineTo(gridSize * 0.7, wiggle - 2);
+                ctx.moveTo(gridSize * 0.6, wiggle);
+                ctx.lineTo(gridSize * 0.7, wiggle + 2);
+            }
+            ctx.stroke();
+            ctx.restore();
+            
+            // Mouth appears
+            if (isNearFood) {
+                ctx.fillStyle = 'black';
+                ctx.beginPath();
+                ctx.arc(snake[i].x * gridSize + gridSize/2, snake[i].y * gridSize + gridSize/2 + 2, 3, 0, Math.PI);
+                ctx.fill();
+            }
+        }
     }
 
     ctx.fillStyle = 'red';
