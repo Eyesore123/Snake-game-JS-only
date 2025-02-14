@@ -51,26 +51,13 @@ function initStyles() {
     document.getElementById('gameCanvas').style.opacity = 1;
     document.getElementById('score').style.display = 'block';
     document.getElementById('title').style.display = 'none';
+    // In case text on top starts to cause problems:
     // document.getElementById('footertext').style.display = 'flex';
     document.getElementById('footer').style.display = 'flex';
     document.getElementById('cogcontainer').style.setProperty('bottom', '10px', 'important');
 
     const controls = document.getElementById('controlcontainer');
     controls.style.display = 'flex';
-
-    // Remove, redundant code:
-
-    // if (window.innerWidth < 469) {
-    //     controls.style.display = 'flex';
-    // } else {
-    //     controls.style.display = 'none';
-    // }
-
-    // if (gameStarted) {
-    //     controls.style.display = 'flex';
-    // } else {
-    //     controls.style.display = 'none';
-    // }
 }
 
 let gameStarted = false;
@@ -470,9 +457,25 @@ function moveSnake() {
     // }
 
     // Check for collision with self
-    if ((head.x < 0) || (head.x >= canvas.width / gridSize) || (head.y < 0) ||  (head.y >= canvas.height / gridSize)) {
-        head.x = (head.x + canvas.width / gridSize) % (canvas.width / gridSize);
-        head.y = (head.y + canvas.height / gridSize) % (canvas.height / gridSize);
+
+    // If modulo is used here, medium grid size gets buggy
+    // after crossing the border.
+
+    // if ((head.x < 0) || (head.x >= canvas.width / gridSize) || (head.y < 0) ||  (head.y >= canvas.height / gridSize)) {
+    //     head.x = (head.x + canvas.width / gridSize) % (canvas.width / gridSize);
+    //     head.y = (head.y + canvas.height / gridSize) % (canvas.height / gridSize);
+    // }
+
+    if (head.x < 0) {
+        head.x = Math.floor(canvas.width / gridSize) - 1;
+    } else if (head.x >= canvas.width / gridSize) {
+        head.x = 0;
+    }
+    
+    if (head.y < 0) {
+        head.y = Math.floor(canvas.height / gridSize) - 1;
+    } else if (head.y >= canvas.height / gridSize) {
+        head.y = 0;
     }
 
     const footer = document.getElementById('footer');
