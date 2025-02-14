@@ -21,7 +21,6 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 * Customizable controls
 * Better stylings for snake / buttons
 * A higher framerate by reorganizing game logic
-* Setting for grid size.
 * Leaderboard
 * Enemies/obstacles
 

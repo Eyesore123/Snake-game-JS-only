@@ -103,3 +103,14 @@ function flipPage() {
     settingsMenu1.style.display = (settingsMenu1.style.display === 'none') ? 'block' : 'none';
     settingsMenu2.style.display = (settingsMenu2.style.display === 'none') ? 'block' : 'none';
 }
+
+// Grid size switch
+
+document.querySelectorAll('.switchlabel').forEach(label => {
+    label.addEventListener('click', function() {
+        // Remove active class from all labels
+        document.querySelectorAll('.switchlabel').forEach(l => l.classList.remove('active'));
+        // Add active class to clicked label
+        this.classList.add('active');
+    });
+});

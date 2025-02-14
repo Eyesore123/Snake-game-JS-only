@@ -85,8 +85,49 @@ let dx = 0;
 let dy = 0;
 
 let score = 0;
+
 // Grid size = the size of one unit of grid in pixels!
-let gridSize = 20;
+let gridSize;
+if (localStorage.getItem('gridSize')) {
+    const switchlabel = document.querySelectorAll('.switchlabel');
+    gridSize = parseInt(localStorage.getItem('gridSize'));
+    if(gridSize === 20) {
+        document.getElementById('switch-radio1').value = 'small';
+        switchlabel[0].classList.add('active');
+        switchlabel[1].classList.remove('active');
+        switchlabel[2].classList.remove('active');
+    } else if(gridSize === 15) {
+        document.getElementById('switch-radio2').value = 'medium';
+        switchlabel[1].classList.add('active');
+        switchlabel[0].classList.remove('active');
+        switchlabel[2].classList.remove('active');
+    } else if(gridSize === 10) {
+        document.getElementById('switch-radio3').value = 'large';
+        switchlabel[2].classList.add('active');
+        switchlabel[0].classList.remove('active');
+        switchlabel[1].classList.remove('active');
+    }
+} else {
+    gridSize = 20;
+}
+
+document.querySelectorAll('.switchlabel input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        if (this.value === 'small') {
+            gridSize = 20;
+            localStorage.setItem('gridSize', 20);
+        } else if (this.value === 'medium') {
+            gridSize = 15;
+            localStorage.setItem('gridSize', 15);
+        } else if (this.value === 'large') {
+            gridSize = 10;
+            localStorage.setItem('gridSize', 10);
+        }
+        // Trigger game board redraw here
+        drawGame();
+    });
+});
+
 let over = false;
 let paused = false;
 
