@@ -58,6 +58,17 @@ function triggerTremble(gamepad, weakMagnitude = 0.3, strongMagnitude = 0.8, dur
     }
 }
 
+// Reversed controls:
+
+const reverseControlsToggle = document.getElementById('reverseControls');
+reverseControlsToggle.checked = localStorage.getItem('reverseControls') === 'true';
+reverseControls = reverseControlsToggle.checked;
+
+reverseControlsToggle.addEventListener('change', (e) => {
+    reverseControls = e.target.checked;
+    localStorage.setItem('reverseControls', reverseControls);
+});
+
 // Polling for gamepad inputs
 function updateGamepad() {
     const gamepads = navigator.getGamepads();
@@ -70,6 +81,7 @@ function updateGamepad() {
             const dPadDown = gamepad.buttons[13].pressed;
             const dPadLeft = gamepad.buttons[14].pressed;
             const dPadRight = gamepad.buttons[15].pressed;
+            
             // Edge detection for the start button, startButtonWasPressed updates to false when the button is released
             let startButtonPressed = gamepad.buttons[9].pressed;
             if (startButtonPressed && !startButtonWasPressed) {
@@ -80,37 +92,38 @@ function updateGamepad() {
             }
 
             if (dPadUp) {
-                enqueueDirection({ dx: 0, dy: -1 })
+                enqueueDirection({ dx: 0, dy: reverseControls ? 1 : -1 })
             } else if (dPadDown) {
-                enqueueDirection({ dx: 0, dy: 1 })
+                enqueueDirection({ dx: 0, dy: reverseControls ? -1 : 1 })
             } else if (dPadLeft) {
-                enqueueDirection({ dx: -1, dy: 0 })
+                enqueueDirection({ dx: reverseControls ? 1 : -1, dy: 0 })
             } else if (dPadRight) {
-                enqueueDirection({ dx: 1, dy: 0 })
+                enqueueDirection({ dx: reverseControls ? -1 : 1, dy: 0 })
             }
            
             const leftStickX = gamepad.axes[0]; 
             const leftStickY = gamepad.axes[1];
-            
             const deadZone = 0.2;
+
             if (Math.abs(leftStickX) > deadZone || Math.abs(leftStickY) > deadZone) {
                 if (Math.abs(leftStickX) > Math.abs(leftStickY)) {
                     if (leftStickX > 0) {
-                        enqueueDirection({ dx: 1, dy: 0 });
+                        enqueueDirection({ dx: reverseControls ? -1 : 1, dy: 0 });
                     } else {
-                        enqueueDirection({ dx: -1, dy: 0 });
+                        enqueueDirection({ dx: reverseControls ? 1 : -1, dy: 0 });
                     }
                 } else {
                     if (leftStickY > 0) {
-                        enqueueDirection({ dx: 0, dy: 1 });
+                        enqueueDirection({ dx: 0, dy: reverseControls ? -1 : 1 });
                     } else {
-                        enqueueDirection({ dx: 0, dy: -1 });
+                        enqueueDirection({ dx: 0, dy: reverseControls ? 1 : -1 });
                     }
                 }
             }
         }
     }
 }
+
 // Direction queue for gamepad
 function enqueueDirection(direction) {
     if (!isOppositeDirection(direction)) {

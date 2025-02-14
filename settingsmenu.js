@@ -98,6 +98,7 @@ snakeColorPicker.addEventListener('input', () => {
 
 // Settings menu flip
 function flipPage() {
+    const footer = document.getElementById('footertext');
     const settingsMenu1 = document.getElementById('settingsmenu');
     const settingsMenu2 = document.getElementById('settingsmenu2');
     settingsMenu1.style.display = (settingsMenu1.style.display === 'none') ? 'block' : 'none';

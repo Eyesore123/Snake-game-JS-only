@@ -51,7 +51,7 @@ function initStyles() {
     document.getElementById('gameCanvas').style.opacity = 1;
     document.getElementById('score').style.display = 'block';
     document.getElementById('title').style.display = 'none';
-    document.getElementById('footertext').style.display = 'flex';
+    // document.getElementById('footertext').style.display = 'flex';
     document.getElementById('footer').style.display = 'flex';
     document.getElementById('cogcontainer').style.setProperty('bottom', '10px', 'important');
 
@@ -325,6 +325,7 @@ function restartGame() {
 let directionQueue = [];
 
 // Modified key press handler to handle queue direction
+// Modified key press handler to handle queue direction
 function handleKeyPress(e) {
     const direction = getDirectionFromKey(e.key);
     
@@ -340,18 +341,35 @@ function handleKeyPress(e) {
     }
 }
 
+let reverseControls = false;
+
 function getDirectionFromKey(key) {
-    switch (key) {
-        case 'ArrowUp':
-            return { dx: 0, dy: -1 };
-        case 'ArrowDown':
-            return { dx: 0, dy: 1 };
-        case 'ArrowLeft':
-            return { dx: -1, dy: 0 };
-        case 'ArrowRight':
-            return { dx: 1, dy: 0 };
-        default:
-            return null;
+    if (reverseControls) {
+        switch (key) {
+            case 'ArrowUp':
+                return { dx: 0, dy: 1 };
+            case 'ArrowDown':
+                return { dx: 0, dy: -1 };
+            case 'ArrowLeft':
+                return { dx: 1, dy: 0 };
+            case 'ArrowRight':
+                return { dx: -1, dy: 0 };
+            default:
+                return null;
+        }
+    } else {
+        switch (key) {
+            case 'ArrowUp':
+                return { dx: 0, dy: -1 };
+            case 'ArrowDown':
+                return { dx: 0, dy: 1 };
+            case 'ArrowLeft':
+                return { dx: -1, dy: 0 };
+            case 'ArrowRight':
+                return { dx: 1, dy: 0 };
+            default:
+                return null;
+        }
     }
 }
 

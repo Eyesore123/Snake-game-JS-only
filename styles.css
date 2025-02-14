@@ -356,6 +356,7 @@ p {
 
     p#footertext {
         margin-top: 50px;
+        display: block;
     }
 }
 
