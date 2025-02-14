@@ -682,10 +682,10 @@ function changeBackgroundInGame(score) {
 
     // Determine the image index based on the score ranges
     if (score >= 800) {
-        imageIndex = 8;
+        imageIndex = 7;
         clearInterval(moveInterval);
     } else if (score >= 700) {
-        imageIndex = 7;
+        imageIndex = 6;
         clearInterval(moveInterval);
     } else if (score >= 500) {
         imageIndex = 5;
