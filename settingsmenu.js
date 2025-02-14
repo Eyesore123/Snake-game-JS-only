@@ -98,7 +98,6 @@ snakeColorPicker.addEventListener('input', () => {
 
 // Settings menu flip
 function flipPage() {
-    const footer = document.getElementById('footertext');
     const settingsMenu1 = document.getElementById('settingsmenu');
     const settingsMenu2 = document.getElementById('settingsmenu2');
     settingsMenu1.style.display = (settingsMenu1.style.display === 'none') ? 'block' : 'none';
@@ -114,4 +113,22 @@ document.querySelectorAll('.switchlabel').forEach(label => {
         // Add active class to clicked label
         this.classList.add('active');
     });
+});
+
+// Eyes
+
+let eyesRemoved = false;
+const removeEyes = document.getElementById('removeEyes');
+
+if (localStorage.getItem('removeEyes') === 'true') {
+    removeEyes.checked = true;
+    eyesRemoved = true;
+} else {
+    removeEyes.checked = false;
+    eyesRemoved = false;
+}
+
+removeEyes.addEventListener('change', () => {
+    eyesRemoved = removeEyes.checked;
+    localStorage.setItem('removeEyes', eyesRemoved);
 });

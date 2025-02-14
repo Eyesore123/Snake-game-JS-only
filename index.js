@@ -251,8 +251,30 @@ function drawGame() {
         } else {
             ctx.fillStyle = localStorage.getItem('snakeColor');
         }
-        // Green color snake: ctx.fillStyle = `green`; 
         ctx.fillRect(snake[i].x * gridSize, snake[i].y * gridSize, gridSize - 2, gridSize - 2);
+
+         // Eyes
+        if (i === 0 && !document.getElementById('removeEyes').checked) {
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(snake[i].x * gridSize + gridSize / 2 - 4, snake[i].y * gridSize + gridSize / 2, 3, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.fillStyle = 'black';
+            ctx.beginPath();
+            ctx.arc(snake[i].x * gridSize + gridSize / 2 - 4, snake[i].y * gridSize + gridSize / 2, 1.5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(snake[i].x * gridSize + gridSize / 2 + 3, snake[i].y * gridSize + gridSize / 2, 3, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.fillStyle = 'black';
+            ctx.beginPath();
+            ctx.arc(snake[i].x * gridSize + gridSize / 2 + 3, snake[i].y * gridSize + gridSize / 2, 1.5, 0, 2 * Math.PI);
+            ctx.fill();
+        }
     }
 
     ctx.fillStyle = 'red';

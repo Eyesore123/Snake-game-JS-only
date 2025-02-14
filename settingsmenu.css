@@ -44,7 +44,7 @@ label {
     padding-right: 30px;
 }
 
-#trembleToggle, #trembletoggle2, #reverseControls {
+#trembleToggle, #trembletoggle2, #reverseControls, #removeEyes {
     width: 20px !important;
     height: 20px !important;
 }
@@ -63,6 +63,10 @@ input[type="color" i] {
     #settingswindow label, #settingswindow2 label {
         font-size: 16px;
     }
+
+    .settingswindow, #settingsmenu, #settingsmenu2 {
+        min-height: 96% !important;
+     }
 }
 
 @media screen and (max-width: 1600px) {
