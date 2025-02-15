@@ -5,7 +5,6 @@ const backdrop = document.getElementById('backdrop');
 function toggleSettingsMenu() {
     backdrop.classList.remove('hidden');
     // MoveInterval to zero!
-    clearInterval(moveInterval);
     const settingMenu = document.getElementById('settingsmenu');
     settingMenu.style.display = (settingMenu.style.display === 'none') ? 'block' : 'none';
 
@@ -132,3 +131,27 @@ removeEyes.addEventListener('change', () => {
     eyesRemoved = removeEyes.checked;
     localStorage.setItem('removeEyes', eyesRemoved);
 });
+
+let fpsShown = false;
+const fpsdiv = document.getElementById('fps');
+const showFPS = document.getElementById('fps2');
+
+if (localStorage.getItem('fps') === 'true') {
+    showFPS.checked = true;
+    fpsShown = true;
+    fpsdiv.style.display = 'flex';
+} else {
+    showFPS.checked = false;
+    fpsShown = false;
+    fpsdiv.style.display = 'none';
+}
+
+showFPS.addEventListener('change', () => {
+    fpsShown = showFPS.checked;
+    localStorage.setItem('fps', fpsShown);
+    if (fpsShown) {
+        fpsdiv.style.display = 'flex';
+    } else {
+        fpsdiv.style.display = 'none';
+    }
+})

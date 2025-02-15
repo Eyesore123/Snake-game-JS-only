@@ -44,7 +44,7 @@ label {
     padding-right: 30px;
 }
 
-#trembleToggle, #trembletoggle2, #reverseControls, #removeEyes {
+#trembleToggle, #trembletoggle2, #reverseControls, #removeEyes, #fps2 {
     width: 20px !important;
     height: 20px !important;
 }

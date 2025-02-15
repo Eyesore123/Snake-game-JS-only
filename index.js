@@ -5,10 +5,18 @@ const startBtn = document.getElementById('startBtn');
 const restartBtn = document.getElementById('restartBtn');
 const cogcontainer = document.getElementById('cogcontainer');
 let soundEnabled = true;
-
 let soundtrack = new Audio('/Assets/soundtrack.mp3');
 soundtrack.loop = true;
 soundtrack.currentTime = 9.5;
+let moveSpeed = 200;
+let accumulator = 0;
+let lastUpdate = performance.now();
+let lastFPSUpdate = lastUpdate;
+let fpsCounter = 0;
+let fps = 0;
+let over = false;
+let gameOverFlag = false;
+let animationFrameId;
 
 const eatSound = new Audio('/Assets/eat.mp3');
 if (localStorage.getItem('eatSoundVolume')) {
@@ -65,7 +73,6 @@ let gameStarted = false;
 
 let snake = [];
 let food = {};
-let gameOverFlag = false;
 
 // Movement variables (speed on the x and y axis)
 // Only one can be active at a time, otherwise the snake would move diagonally
@@ -116,12 +123,10 @@ document.querySelectorAll('.switchlabel input[type="radio"]').forEach(radio => {
     });
 });
 
-let over = false;
 let paused = false;
 
 // Movement happens in intervals. When the game ends, the interval is cleared.
-let moveSpeed = 200;
-let moveInterval;
+let lastMoveTime = 0; // time of last move
 function updateSpeed() {
     if (score >= 900) {
         moveSpeed = 100;
@@ -146,10 +151,8 @@ function updateSpeed() {
 
 function updateGameSpeed() {
     updateSpeed();
-
-    clearInterval(moveInterval);
-    moveInterval = setInterval(moveSnake, moveSpeed);
-    //console.log(moveSpeed);
+    lastMoveTime = performance.now();
+    // console.log(moveSpeed);
 }
 
 // Debounce function to prevent rapid clicks / not a good approach for game mechanics
@@ -169,25 +172,31 @@ function updateGameSpeed() {
 let backgroundInterval = setInterval(changeBackground, 10000);
 function togglePause() {
     if (paused) {
-        console.log("Paused");
-        moveInterval = setInterval(moveSnake, moveSpeed);  // Restart the movement interval
+        paused = false;
+        updateGameSpeed();  // Restart the movement interval
     } else {
-        clearInterval(moveInterval);  // Pause the game
+        paused = true;  // Pause the game
     }
-    paused = !paused;
 }
 
 function handleClick() {
-    console.log("clicked");
+    // console.log("clicked");
     togglePause();
-    console.log("Pause toggled");
+    // console.log("Pause toggled");
 }
 
 // Event listeners
 document.getElementById('gameCanvas').addEventListener('click', handleClick);
 
 function initGame() {
-
+    cancelAnimationFrame(animationFrameId);
+    moveSpeed = 200;
+    accumulator = 0;
+    fpsCounter = 0;
+    fps = 0;
+    lastFPSUpdate = performance.now();
+    lastUpdate = performance.now();
+    accumulator = 0;
     // Dynamic buttons:
     restartBtn.style.display = 'block';
     startBtn.style.display = 'none';
@@ -196,7 +205,6 @@ function initGame() {
     // Reset bg change interval
 
     clearInterval(backgroundInterval);
-    moveInterval = setInterval(moveSnake, moveSpeed);
     
     // Reset game state
     gameStarted = true;
@@ -219,6 +227,10 @@ function initGame() {
     } else {
         drawGame();
     }
+
+    lastRender = 0;
+    accumulator = 0;
+    animationFrameId = requestAnimationFrame(gameLoop);
 }
 
 function drawGame() {
@@ -355,9 +367,14 @@ function placeFood() {
 }
 
 function restartGame() {
+    moveSpeed = 200;
+    accumulator = 0;
+    fpsCounter = 0;
+    fps = 0;
+    lastFPSUpdate = 0;
+    lastUpdate = 0;
     soundtrack2.currentTime = 0;
     clearInterval(flashInterval);
-    clearInterval(moveInterval); // Clear the previous interval
     directionQueue = [];
     // Reset soundtrack to original state
     soundtrack.pause();
@@ -481,8 +498,7 @@ document.addEventListener('keydown', (event) => {
         case 'd':
             document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
             break;
-    }
-            
+    }         
 });
 
 // Move the snake and apply direction changes from the queue
@@ -494,7 +510,7 @@ function moveSnake() {
         const nextDirection = directionQueue.shift();
         dx = nextDirection.dx;
         dy = nextDirection.dy;
-        console.log(dx, dy);
+        // console.log(dx, dy);
     }
 
     const head = { x: snake[0].x + dx, y: snake[0].y + dy };
@@ -543,14 +559,14 @@ function moveSnake() {
                 document.getElementById('gameOver').style.display = 'flex';
                 gameOverFlag = true;
                 directionQueue = [];
-                console.log("Game Over flag set to true");
+                // console.log("Game Over flag set to true");
                 flashCanvas();
-                clearInterval(moveInterval);
+                paused = true;
                 if (activeGamepad) {
                     triggerTremble(activeGamepad, 0.2, 0.8, 500);
                     }
             }
-            clearInterval(moveInterval);
+            paused = true;
             return;
         }
     }
@@ -561,12 +577,12 @@ function moveSnake() {
         eatSound.play();
 
     if (score >= 290 && !soundtrack2playing) {
-        console.log("Switching to soundtrack 2");
+        // console.log("Switching to soundtrack 2");
         soundtrack.pause();
         soundtrack2.play().then(() => {
             soundtrack2.volume = volumeSlider.value;
             soundtrack2playing = true;
-            console.log("Soundtrack 2 is playing.");
+            // console.log("Soundtrack 2 is playing.");
             source.disconnect(analyser);
             source2.connect(analyser);
             source = source2;
@@ -578,12 +594,12 @@ function moveSnake() {
     }
     
     if (score < 20 && soundtrack2playing) {
-        console.log("Switching back to soundtrack 1");
+        // console.log("Switching back to soundtrack 1");
         soundtrack2.pause().then(() => {
             soundtrack.play().then(() => {
                 soundtrack.volume = volumeSlider.value;
                 soundtrack2playing = false;
-                console.log("Soundtrack 1 is playing.");
+                // console.log("Soundtrack 1 is playing.");
                 source2.disconnect(analyser);
                 source.connect(analyser);
                 analyzeAudio();
@@ -600,7 +616,7 @@ function moveSnake() {
     }
 
     score += 10;
-    console.log("Score:", score);
+    // console.log("Score:", score);
     // Redundant, was tested before the use of switch in changeBackgroundInGame func:
     // if (score === 100 || score === 200 || score === 300 || score === 400 || score === 500) {
     //     changeBackgroundInGame(score);
@@ -619,7 +635,7 @@ function moveSnake() {
 let flashInterval;
 
 function flashCanvas() {
-    console.log("Flashing canvas...");
+    // console.log("Flashing canvas...");
     let flashing = true;
     flashInterval = setInterval(() => {
         if (flashing) {
@@ -681,38 +697,28 @@ function changeBackground() {
 }
 
 function changeBackgroundInGame(score) {
-    clearInterval(backgroundInterval);
-    console.log('changeBackground called');
     const body = document.body;
     let imageIndex;
 
-    console.log(`Score: ${score}`);
+    // console.log(`Score: ${score}`);
 
     // Determine the image index based on the score ranges
     if (score >= 900) {
         imageIndex = 8;
-        clearInterval(moveInterval);
     } else if (score >= 700) {
         imageIndex = 7;
-        clearInterval(moveInterval);
     } else if (score >= 600) {
         imageIndex = 6;
-        clearInterval(moveInterval);
     } else if (score >= 500) {
         imageIndex = 5;
-        clearInterval(moveInterval);
     } else if (score >= 400) {
         imageIndex = 4;
-        clearInterval(moveInterval);
     } else if (score >= 300) {
         imageIndex = 3;
-        clearInterval(moveInterval);
     } else if (score >= 200) {
         imageIndex = 2;
-        clearInterval(moveInterval);
     } else if (score >= 100) {
         imageIndex = 1;
-        clearInterval(moveInterval);
     } else {
         imageIndex = 0; // snake.webp (default background)
     }
@@ -722,8 +728,7 @@ function changeBackgroundInGame(score) {
     body.style.backgroundRepeat = "no-repeat";
     body.style.backgroundPosition = "center center";
     body.style.backgroundSize = "cover";
-    console.log(`Background image updated to: ${backgroundImages[imageIndex]}`);
-    console.log(currentBackground);
+    // console.log(`Background image updated to: ${backgroundImages[imageIndex]}`);
 }
 
 function handleSoundToggle() {
@@ -804,59 +809,50 @@ applyButton.addEventListener('click', () => {
 
 analyzeAudio();
 
-// eatSound.volume = 0.2;
-// soundtrack.volume = 0.15;
+function updateFPSCounter() {
+    const currentTime = performance.now();
 
-// Framerate counter for testing purposes:
+    fpsCounter++;
+    if (currentTime - lastFPSUpdate >= 1000) {
+        fps = fpsCounter;
+        fpsCounter = 0;
+        lastFPSUpdate = currentTime;
+    }
 
-// let lastTime = 0;
-// const maxFPS = 60;
-// let fps = 0;
-// let fpsCounter = 0;
-// let lastFPSUpdate = 0;
+    // fps
+    fpsdiv.innerText = `FPS: ${fps}`;
+}
 
-// function update(time) {
-//   const delta = time - lastTime;
-//   if (delta < 1000 / maxFPS) return;
-//   lastTime = time;
-//   fpsCounter++;
-//   if (time - lastFPSUpdate >= 1000) {
-//     fps = fpsCounter;
-//     fpsCounter = 0;
-//     lastFPSUpdate = time;
-//   }
-//   // Update game state here
-//   document.getElementById('fps').innerText = `FPS: ${fps}`;
-//   requestAnimationFrame(update);
-// }
+function gameLoop() {
+    if (!gameStarted || over) {
+        cancelAnimationFrame(animationFrameId);
+        return;
+    }
+    
 
-// // Get the FPS from the canvas
-// function getFPS() {
-//   return fps;
-// }
+    // console.log('fpsCounter:', fpsCounter);
 
-// // Update the FPS display
-// setInterval(() => {
-//   document.getElementById('fps').innerText = `FPS: ${getFPS()}`;
-// }, 1000);
+    changeBackgroundInGame(score);
 
-// update();
+    const currentTime = performance.now();
+    let deltaTime = currentTime - lastUpdate;
+    deltaTime = Math.min(deltaTime, 100);
+    lastUpdate = currentTime;
+    accumulator += deltaTime;
 
-// Structure for game loop:
+    // (snake movement) is updated at the correct move speed
+    while (accumulator >= moveSpeed) {
+        updateGameSpeed();
+        moveSnake();
+        accumulator -= moveSpeed;
+    }
 
-// function gameLoop() {
-//     drawGame();
-//     moveSnake();
-//     // Other game logic here
-//     requestAnimationFrame(gameLoop);
-//   }
-  
-//   function initGame() {
-//     // Initialization code here
-//     gameLoop();
-//   }
-  
-//   function flashGame() {
-//     // Flash game code here
-//     gameLoop();
-//   }
+    drawGame();
+    if (controllerActive) {
+        updateGamepad();
+    }
+    updateFPSCounter();
+
+    animationFrameId = requestAnimationFrame(gameLoop);
+
+}

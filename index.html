@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" sizes="192x192" href="/Assets/Icons/snake_icon_192.png">
 
 <!-- Framerate counter for testing purposes -->
-<!-- <div id="fps"></div> -->
+<div id="fps"></div>
 
 </head>
 <body id="body">
@@ -76,11 +76,15 @@
                 </label> 
                 <input type="checkbox" id="reverseControls">
 
+                <label for="fps" class="switch">
+                    <span>FPS counter</span>
+                </label> 
+                <input type="checkbox" id="fps2">
+
                 <label for="removeEyes" class="switch">
                     <span>Remove eyes and facial animation</span>
                 </label> 
-                <input type="checkbox" id="removeEyes">
-                 
+                <input type="checkbox" id="removeEyes">              
 
                 <label>Grid size:</label>
                     <span id="gridsize">
@@ -96,7 +100,7 @@
 
                         <label class="switchlabel" for="switch-radio3">2x
                         <input type="radio" id="switch-radio3" name="radio" value="large"/>
-                    </span>    
+                    </span>
             </p>
         </div>
     </div>

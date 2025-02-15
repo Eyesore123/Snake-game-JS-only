@@ -20,7 +20,6 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 ## Planned improvements in the order of importance
 
 * Better stylings for buttons!
-* A higher framerate by reorganizing game logic
 * Leaderboard (only for normal mode)
 
 ## Known issues

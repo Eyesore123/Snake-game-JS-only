@@ -601,3 +601,8 @@ body::after {
   .flippage svg {
     min-width: 19px;
   }
+
+  #fps {
+    position: fixed;
+    top: 1vh;
+  }

@@ -149,12 +149,3 @@ window.addEventListener("gamepaddisconnected", (e) => {
     controllerActive = false;
     activeGamepad = null;
 });
-
-function gameLoop() {
-    if (controllerActive) {
-        updateGamepad();
-    }
-    requestAnimationFrame(gameLoop);
-}
-
-gameLoop();
