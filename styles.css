@@ -466,11 +466,13 @@ div#left.left {
       }
 }
 
-/* @media screen and (max-height: 1000px) and (min-width: 600px) and (max-width: 1600px) {
-    .controlcontainer {
-        gap: 250px !important;
-    }
-} */
+@media screen and (max-height: 1000px) and (min-width: 600px) and (max-width: 1600px) {
+    #fps {
+    position: fixed;
+    top: 0vh;
+    font-size: 1.5rem;
+  }
+}
 
 #soundtrack {
     margin: 30px;
