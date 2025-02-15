@@ -34,7 +34,8 @@ const backgroundImages = [
     './Assets/snake_5.webp',
     './Assets/snake_6.webp',
     './Assets/snake_7.webp',
-    './Assets/snake_8.webp'
+    './Assets/snake_8.webp',
+    './Assets/snake_9.jpeg'
 ];
 
 function preloadImages() {
@@ -122,7 +123,9 @@ let paused = false;
 let moveSpeed = 200;
 let moveInterval;
 function updateSpeed() {
-    if (score >= 700) {
+    if (score >= 900) {
+        moveSpeed = 100;
+    } else if (score >= 700) {
         moveSpeed = 110;
     } else if (score >= 600) {
         moveSpeed = 120;
@@ -598,9 +601,10 @@ function moveSnake() {
 
     score += 10;
     console.log("Score:", score);
-    if (score === 100 || score === 200 || score === 300 || score === 400 || score === 500) {
-        changeBackgroundInGame(score);
-    }
+    // Redundant, was tested before the use of switch in changeBackgroundInGame func:
+    // if (score === 100 || score === 200 || score === 300 || score === 400 || score === 500) {
+    //     changeBackgroundInGame(score);
+    // }
     updateGameSpeed();
     scoreElement.textContent = `Score: ${score}`;
     placeFood();
@@ -666,6 +670,10 @@ function changeBackground() {
     } else if (currentBackground === 7) {
     body.style.backgroundImage = "url('./Assets/snake_8.webp')";
     currentBackground = 8;
+    // Last image is hidden and only seen after over 900 points
+    // } else if (currentBackground === 8) {
+    // body.style.backgroundImage = "url('./Assets/snake_9.jpeg')";
+    // currentBackground = 9;
     } else {
     body.style.backgroundImage = "url('./Assets/snake.webp')";
     currentBackground = 1;
@@ -681,10 +689,13 @@ function changeBackgroundInGame(score) {
     console.log(`Score: ${score}`);
 
     // Determine the image index based on the score ranges
-    if (score >= 800) {
-        imageIndex = 7;
+    if (score >= 900) {
+        imageIndex = 8;
         clearInterval(moveInterval);
     } else if (score >= 700) {
+        imageIndex = 7;
+        clearInterval(moveInterval);
+    } else if (score >= 600) {
         imageIndex = 6;
         clearInterval(moveInterval);
     } else if (score >= 500) {
@@ -700,7 +711,7 @@ function changeBackgroundInGame(score) {
         imageIndex = 2;
         clearInterval(moveInterval);
     } else if (score >= 100) {
-        imageIndex = 1; // snake_2.webp
+        imageIndex = 1;
         clearInterval(moveInterval);
     } else {
         imageIndex = 0; // snake.webp (default background)
