@@ -828,8 +828,6 @@ function gameLoop() {
         cancelAnimationFrame(animationFrameId);
         return;
     }
-    
-
     // console.log('fpsCounter:', fpsCounter);
 
     changeBackgroundInGame(score);
