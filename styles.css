@@ -470,7 +470,7 @@ div#left.left {
     #fps {
     position: fixed;
     top: 0vh;
-    left: 10vw;
+    left: 40vw;
     font-size: 1.5rem;
   }
 }
