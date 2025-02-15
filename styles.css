@@ -377,6 +377,7 @@ button:hover {
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
     font-size: 30px;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 
@@ -605,4 +606,5 @@ body::after {
   #fps {
     position: fixed;
     top: 1vh;
+    font-size: 1.5rem;
   }
