@@ -21,7 +21,7 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 
 * Ease-in-out effect of the background image doesn't work on Mozilla because view transitions API is not supported. There might be a workaround but that would require using pseudoelements and getting rid of the ease-in-out effect.
 * Game can lead to game over suddenly in rare instances when some unknown combination of keys is pressed and the game over condition gets triggered prematurely. Basically what happens is that the snake gets longer than it's supposed to. What you see on the screen is always a bit behind and in some cases can get out of sync with user interaction. Direction queue array is used to prevent gameovers that get triggered in wrong places (it helps fast turns), but it doesn't do miracles. Erratic behaviour increases with higher speeds. I tried adding a cooldown between key presses to prevent unexpected game overs, but it didn't seem to help.
-* Game audio might require a game restart or a toggle of the audio button before it starts. Originally game audio started with the start button, but after adding a second audio track it started being unreliable. Sometimes it starts, sometimes it doesn't. Of course we know that browsers require user interaction to play audio, for good reasons, but the press of the start button is not always considered 'user interaction', according to browser log. Audio requires async operations, but for some reason it gets harder to implement audio in browser when there are more than one audio source, and there are more points of failure. It's a bit of a mess and the code starts to look messy, too.
+
 
 ![snake_game2](https://github.com/user-attachments/assets/67f92ca1-3c2f-4061-a68d-472d3be7adbc)
 

@@ -130,6 +130,10 @@ p {
         height: 400px;
         margin-top: 11vh;
     }
+
+    #fps {
+        right: 50vw;
+    }
 }
 
 /* Game canvas sizes larger for larger screens: */

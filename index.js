@@ -233,6 +233,7 @@ function initGame() {
     animationFrameId = requestAnimationFrame(gameLoop);
 
     // Experimental, added to ensure that soundtrack starts playing after the game starts:
+    if(soundEnabled) {
     soundtrack.pause();
     soundtrack = new Audio('/Assets/soundtrack.mp3');
     soundtrack.loop = true;
@@ -247,6 +248,7 @@ function initGame() {
     audioContext.resume();
     analyzeAudio();
     // End experimental
+    }
 }
 
 function drawGame() {
@@ -402,7 +404,9 @@ function restartGame() {
     // Reset audio connections
     source = audioContext.createMediaElementSource(soundtrack);
     source.connect(analyser);
+    if(soundEnabled) {
     soundtrack.play();
+    }
     soundtrack2playing = false;
     audioContext.resume();
     analyzeAudio();
