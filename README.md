@@ -24,10 +24,10 @@ Welcome to the Snake Game! This classic arcade game is a timeless classic that c
 
 
 ![snake_game2](https://github.com/user-attachments/assets/67f92ca1-3c2f-4061-a68d-472d3be7adbc)
-
 ![snake_game4](https://github.com/user-attachments/assets/363111ce-215e-4f96-a5ab-48829c7c6368)
-
 ![snake_game3](https://github.com/user-attachments/assets/fc78bdee-f11a-44a2-8259-f2925d718107)
+![snake_game5](https://github.com/user-attachments/assets/3fe17c53-9cc2-446e-9bf7-3524413ff6a2)
+![snake_game6](https://github.com/user-attachments/assets/5dcfc1cb-91cd-4856-8ef0-04fc0ca20f00)
 
 <img src="https://github.com/user-attachments/assets/d267a0a2-9d89-4afe-ba47-ed560b90d92c" width="400" />
 
