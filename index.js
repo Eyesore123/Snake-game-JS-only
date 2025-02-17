@@ -231,6 +231,22 @@ function initGame() {
     lastRender = 0;
     accumulator = 0;
     animationFrameId = requestAnimationFrame(gameLoop);
+
+    // Experimental, added to ensure that soundtrack starts playing after the game starts:
+    soundtrack.pause();
+    soundtrack = new Audio('/Assets/soundtrack.mp3');
+    soundtrack.loop = true;
+    soundtrack.currentTime = 9.5;
+    soundtrack.volume = volumeSlider.value;
+    
+    // Reset audio connections
+    source = audioContext.createMediaElementSource(soundtrack);
+    source.connect(analyser);
+    soundtrack.play();
+    soundtrack2playing = false;
+    audioContext.resume();
+    analyzeAudio();
+    // End experimental
 }
 
 function drawGame() {
