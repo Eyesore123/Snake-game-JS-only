@@ -17,8 +17,8 @@ let fps = 0;
 let over = false;
 let gameOverFlag = false;
 let animationFrameId;
-
 const eatSound = new Audio('/Assets/eat.mp3');
+
 if (localStorage.getItem('eatSoundVolume')) {
     eatSound.volume = parseFloat(localStorage.getItem('eatSoundVolume'));
 } else {
