@@ -74,7 +74,6 @@ let gameStarted = false;
 let snake = [];
 let food = {};
 
-// Movement variables (speed on the x and y axis)
 // Only one can be active at a time, otherwise the snake would move diagonally
 let dx = 0;
 let dy = 0;
@@ -126,7 +125,7 @@ document.querySelectorAll('.switchlabel input[type="radio"]').forEach(radio => {
 let paused = false;
 
 // Movement happens in intervals. When the game ends, the interval is cleared.
-let lastMoveTime = 0; // time of last move
+let lastMoveTime = 0; // time of the last move
 function updateSpeed() {
     if (score >= 900) {
         moveSpeed = 100;
@@ -175,7 +174,7 @@ function togglePause() {
         paused = false;
         updateGameSpeed();  // Restart the movement interval
     } else {
-        paused = true;  // Pause the game
+        paused = true;
     }
 }
 
@@ -185,7 +184,7 @@ function handleClick() {
     // console.log("Pause toggled");
 }
 
-// Event listeners
+// Event listener for canvas pause
 document.getElementById('gameCanvas').addEventListener('click', handleClick);
 
 function initGame() {
@@ -232,7 +231,7 @@ function initGame() {
     accumulator = 0;
     animationFrameId = requestAnimationFrame(gameLoop);
 
-    // Experimental, added to ensure that soundtrack starts playing after the game starts:
+    // Added to ensure that soundtrack starts playing after the game starts:
     if(soundEnabled) {
     soundtrack.pause();
     soundtrack = new Audio('/Assets/soundtrack.mp3');
@@ -247,7 +246,6 @@ function initGame() {
     soundtrack2playing = false;
     audioContext.resume();
     analyzeAudio();
-    // End experimental
     }
 }
 
@@ -424,7 +422,6 @@ function restartGame() {
 // Variables to store movement directions
 let directionQueue = [];
 
-// Modified key press handler to handle queue direction
 // Modified key press handler to handle queue direction
 function handleKeyPress(e) {
     const direction = getDirectionFromKey(e.key);
@@ -706,10 +703,6 @@ function changeBackground() {
     } else if (currentBackground === 7) {
     body.style.backgroundImage = "url('./Assets/snake_8.webp')";
     currentBackground = 8;
-    // Last image is hidden and only seen after over 900 points
-    // } else if (currentBackground === 8) {
-    // body.style.backgroundImage = "url('./Assets/snake_9.jpeg')";
-    // currentBackground = 9;
     } else {
     body.style.backgroundImage = "url('./Assets/snake.webp')";
     currentBackground = 1;
@@ -848,7 +841,6 @@ function gameLoop() {
         cancelAnimationFrame(animationFrameId);
         return;
     }
-    // console.log('fpsCounter:', fpsCounter);
 
     changeBackgroundInGame(score);
 
