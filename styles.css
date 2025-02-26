@@ -47,13 +47,18 @@ canvas {
 
 #gameOver {
     position: absolute;
-    display: inline-block;
+    display: block;
+    max-width: fit-content !important;
     justify-content: center;
     margin: auto;
     top: 6vh;
     color: black;
     font-weight: 900;
     font-size: 3em;
+    /*  */
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 1%;
 }
 
 div {
@@ -184,10 +189,6 @@ p {
 
     #gameCanvas {
         margin-top: -10vh;
-    }
-
-    #gameOver {
-        padding-bottom: 20px;
     }
 
     #cogcontainer {
@@ -353,7 +354,6 @@ p {
     }
 
     p#score.score {
-        margin-top: -10vh;
         margin-bottom: 4vh;
         padding: 10px;
     }
