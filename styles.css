@@ -11,6 +11,10 @@ p#score.score {
     border-radius: 1%;
 }
 
+button#restartBtn {
+    margin-bottom: 30px;
+}
+
 body {
     margin: 0;
     padding: 0;
